@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mest/services/date.service.dart';
 import 'package:mest/theme/theme.dart';
-import 'package:mest/widgets/foodCard.dart';
+import 'package:mest/widgets/bottom_navigation.dart';
 import 'package:mest/widgets/tab_viewer.dart';
 import 'package:mest/widgets/tabs.dart';
 
@@ -13,9 +14,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String day = "Tuesday";
-  String month = "April";
-  int date = 7;
+  String day = dateFormat();
 
   @override
   Widget build(BuildContext context) {
@@ -71,11 +70,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     height: 18,
                   ),
                   Text(
-                    "$day, $month $date",
+                    day,
                     style: const TextStyle(
                         color: AppTheme.lightColor,
-                        fontSize: 18,
-                        fontWeight: FontWeight.normal),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w100),
                   ),
                   const SizedBox(
                     height: 32,
@@ -90,19 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
             )
           ],
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            final snackbar = SnackBar(
-                content: const Text("Omera this one is yet to be implemented"),
-                action: SnackBarAction(
-                  label: 'Relaax!',
-                  onPressed: () => {},
-                ));
-            ScaffoldMessenger.of(context).showSnackBar(snackbar);
-          },
-          tooltip: 'Add new',
-          child: const Icon(Icons.add),
-        ),
+        bottomNavigationBar: const BottomAppNavigation(),
       ),
     );
   }

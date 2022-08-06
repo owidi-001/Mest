@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:mest/widgets/input_fields.dart';
 
 class NewFood extends StatefulWidget {
   const NewFood({Key? key}) : super(key: key);
@@ -12,6 +11,27 @@ class NewFood extends StatefulWidget {
 class _NewFoodState extends State<NewFood> {
   @override
   Widget build(BuildContext context) {
-    return Center();
+    return SafeArea(
+        child: Scaffold(
+      body: Column(
+        children: <Widget>[
+          const Text("Guide text"),
+          Form(
+              child: Center(
+            child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: Column(
+                      children: [
+                        makeInput(label: "Name",),
+                        makeInput(label: "Description",obsureText: true),
+                        makeInput(label: "Cost",obsureText: true),
+                      ],
+                    ),
+                  )
+            ),
+          )
+        ],
+      ),
+    ));
   }
 }

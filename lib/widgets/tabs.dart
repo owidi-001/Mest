@@ -16,10 +16,22 @@ class _MenuTabsState extends State<MenuTabs> {
       indicatorWeight: 3,
       indicatorColor: AppTheme.lightColor,
       tabs: <Widget>[
-        Text("Tea"),
-        Text("Lunch"),
-        Text("Supper"),
-        Text("Snacks")
+        Text(
+          "Tea",
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        ),
+        Text(
+          "Lunch",
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        ),
+        Text(
+          "Supper",
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        ),
+        Text(
+          "Snacks",
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        )
       ],
     );
   }

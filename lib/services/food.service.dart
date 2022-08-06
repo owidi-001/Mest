@@ -3,48 +3,76 @@ import 'dart:math';
 import 'package:mest/models/food.model.dart';
 import 'package:mest/utils/constants.dart';
 
-List<Food> breakfast = [
-  Food(name: "Ginger", image: "${baseUrl}ginger.png"),
-  Food(name: "Lamb Meat", image: "${baseUrl}lamb_meat.png"),
-  Food(name: "Pepper", image: "${baseUrl}pepper_red.png"),
-  Food(name: "Carrots", image: "${baseUrl}carrots.png"),
+FoodCategory category1 = FoodCategory(name: "Breakfast");
+FoodCategory category2 = FoodCategory(name: "Lunch");
+FoodCategory category3 = FoodCategory(name: "Supper");
+FoodCategory category4 = FoodCategory(name: "Snack");
+
+List<Food> foods = [
+  Food(
+      name: "Ginger",
+      image: "${baseUrl}ginger.png",
+      description: "Food description",
+      category: category1),
+  Food(
+      name: "Lamb Meat",
+      image: "${baseUrl}lamb_meat.png",
+      description: "Food description",
+      category: category1),
+  Food(
+      name: "Pepper",
+      image: "${baseUrl}pepper_red.png",
+      description: "Food description",
+      category: category1),
+  Food(
+      name: "Carrots",
+      image: "${baseUrl}carrots.png",
+      description: "Food description",
+      category: category1),
 ];
 
 List<Food> allBreakFast() {
-  return breakfast;
+  List<Food> foodFiltered = [];
+  for (var food in foods) {
+    if (food.category.name.toUpperCase() == "BREAKFAST") {
+      foodFiltered.add(food);
+    }
+  }
+  return foodFiltered;
 }
-
-List<Food> lunch = [
-  Food(name: "Ginger", image: "${baseUrl}ginger.png"),
-  Food(name: "Lamb Meat", image: "${baseUrl}lamb_meat.png"),
-  Food(name: "Pepper", image: "${baseUrl}pepper_red.png"),
-  Food(name: "Carrots", image: "${baseUrl}carrots.png"),
-];
 
 List<Food> allLunch() {
-  return lunch;
+  List<Food> foodFiltered = [];
+  for (var food in foods) {
+    if (food.category.name.toUpperCase() == "LUNCH") {
+      foodFiltered.add(food);
+    }
+  }
+  return foodFiltered;
 }
-
-List<Food> supper = [
-  Food(name: "Ginger", image: "${baseUrl}ginger.png"),
-  Food(name: "Lamb Meat", image: "${baseUrl}lamb_meat.png"),
-  Food(name: "Pepper", image: "${baseUrl}pepper_red.png"),
-  Food(name: "Carrots", image: "${baseUrl}carrots.png"),
-];
 
 List<Food> allSupper() {
-  return supper;
+  List<Food> foodFiltered = [];
+  for (var food in foods) {
+    if (food.category.name.toUpperCase() == "SUPPER") {
+      foodFiltered.add(food);
+    }
+  }
+  return foodFiltered;
 }
 
-List<Food> snack = [
-  Food(name: "Ginger", image: "${baseUrl}ginger.png"),
-  Food(name: "Lamb Meat", image: "${baseUrl}lamb_meat.png"),
-  Food(name: "Pepper", image: "${baseUrl}pepper_red.png"),
-  Food(name: "Carrots", image: "${baseUrl}carrots.png"),
-];
-
 List<Food> allSnack() {
-  return snack;
+  List<Food> foodFiltered = [];
+  for (var food in foods) {
+    if (food.category.name.toUpperCase() == "SNACKS") {
+      foodFiltered.add(food);
+    }
+  }
+  return foodFiltered;
+}
+
+List<Food> allFoods() {
+  return foods;
 }
 
 Food randomFood(List<Food> foods) {
