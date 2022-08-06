@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mest/home.dart';
 import 'package:mest/screens/home.dart';
 import 'package:mest/screens/new_food.dart';
 import 'package:mest/utils/routes.dart';
@@ -17,11 +18,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Mest',
       theme: ThemeData(fontFamily: GoogleFonts.lato().fontFamily),
-      initialRoute: '/',
+      // initialRoute: '/',
       routes: {
-        "/":(context) => const MyHomePage(),
+        // "/":(context) => const MyHomePage(),
         CustomRoutes.newFood: (context) => const NewFood(),
       },
+      home:  const Home()
     );
   }
 }

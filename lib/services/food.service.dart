@@ -6,7 +6,7 @@ import 'package:mest/utils/constants.dart';
 FoodCategory category1 = FoodCategory(name: "Breakfast");
 FoodCategory category2 = FoodCategory(name: "Lunch");
 FoodCategory category3 = FoodCategory(name: "Supper");
-FoodCategory category4 = FoodCategory(name: "Snack");
+FoodCategory category4 = FoodCategory(name: "Snacks");
 
 List<Food> foods = [
   Food(
@@ -29,6 +29,69 @@ List<Food> foods = [
       image: "${baseUrl}carrots.png",
       description: "Food description",
       category: category1),
+
+       Food(
+      name: "Ginger",
+      image: "${baseUrl}ginger.png",
+      description: "Food description",
+      category: category2),
+  Food(
+      name: "Lamb Meat",
+      image: "${baseUrl}lamb_meat.png",
+      description: "Food description",
+      category: category2),
+  Food(
+      name: "Pepper",
+      image: "${baseUrl}pepper_red.png",
+      description: "Food description",
+      category: category2),
+  Food(
+      name: "Carrots",
+      image: "${baseUrl}carrots.png",
+      description: "Food description",
+      category: category2),
+
+       Food(
+      name: "Ginger",
+      image: "${baseUrl}ginger.png",
+      description: "Food description",
+      category: category3),
+  Food(
+      name: "Lamb Meat",
+      image: "${baseUrl}lamb_meat.png",
+      description: "Food description",
+      category: category3),
+  Food(
+      name: "Pepper",
+      image: "${baseUrl}pepper_red.png",
+      description: "Food description",
+      category: category3),
+  Food(
+      name: "Carrots",
+      image: "${baseUrl}carrots.png",
+      description: "Food description",
+      category: category3),
+
+       Food(
+      name: "Ginger",
+      image: "${baseUrl}ginger.png",
+      description: "Food description",
+      category: category4),
+  Food(
+      name: "Lamb Meat",
+      image: "${baseUrl}lamb_meat.png",
+      description: "Food description",
+      category: category4),
+  Food(
+      name: "Pepper",
+      image: "${baseUrl}pepper_red.png",
+      description: "Food description",
+      category: category4),
+  Food(
+      name: "Carrots",
+      image: "${baseUrl}carrots.png",
+      description: "Food description",
+      category: category4),
 ];
 
 List<Food> allBreakFast() {
@@ -76,5 +139,5 @@ List<Food> allFoods() {
 }
 
 Food randomFood(List<Food> foods) {
-  return foods[Random().nextInt(foods.length)];
+  return foods[Random().nextInt(foods.length - 1)];
 }

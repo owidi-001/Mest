@@ -13,24 +13,26 @@ class _NewFoodState extends State<NewFood> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      body: Column(
-        children: <Widget>[
-          const Text("Guide text"),
-          Form(
-              child: Center(
-            child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Column(
-                      children: [
-                        makeInput(label: "Name",),
-                        makeInput(label: "Description",obsureText: true),
-                        makeInput(label: "Cost",obsureText: true),
-                      ],
-                    ),
-                  )
-            ),
-          )
-        ],
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            const Text("Guide text"),
+            Form(
+                child: Center(
+              child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Column(
+                        children: [
+                          makeInput(label: "Name",),
+                          makeInput(label: "Description",obsureText: true),
+                          makeInput(label: "Cost",obsureText: true),
+                        ],
+                      ),
+                    )
+              ),
+            )
+          ],
+        ),
       ),
     ));
   }

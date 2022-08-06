@@ -23,28 +23,28 @@ class FoodCardWidgetHorizontal extends StatelessWidget {
           elevation: 0,
           child: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Flex(
-              direction: Axis.vertical,
-              children: [
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
                 Flexible(
-                  flex: 2,
+                  flex: 1,
                   child: Image.asset(
                     food.image,
-                    width: 120,
-                    height: 120,
+                    // width: 120,
+                    // height: 120,
                   ),
                 ),
-                const SizedBox(
-                  height: 12,
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  child: Text(
-                    food.name,
-                    style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: AppTheme.darkColor),
+                Flexible(
+                  flex: 2,
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      food.name,
+                      style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: AppTheme.darkColor),
+                    ),
                   ),
                 ),
               ],
