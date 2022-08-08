@@ -29,8 +29,7 @@ List<Food> foods = [
       image: "${baseUrl}carrots.png",
       description: "Food description",
       category: category1),
-
-       Food(
+  Food(
       name: "Ginger",
       image: "${baseUrl}ginger.png",
       description: "Food description",
@@ -50,8 +49,7 @@ List<Food> foods = [
       image: "${baseUrl}carrots.png",
       description: "Food description",
       category: category2),
-
-       Food(
+  Food(
       name: "Ginger",
       image: "${baseUrl}ginger.png",
       description: "Food description",
@@ -71,8 +69,7 @@ List<Food> foods = [
       image: "${baseUrl}carrots.png",
       description: "Food description",
       category: category3),
-
-       Food(
+  Food(
       name: "Ginger",
       image: "${baseUrl}ginger.png",
       description: "Food description",
@@ -140,4 +137,13 @@ List<Food> allFoods() {
 
 Food randomFood(List<Food> foods) {
   return foods[Random().nextInt(foods.length - 1)];
+}
+
+void deleteFood(Food food) {
+  print("Delete button pressed");
+  if (foods.contains(food)) {
+    print("Action being taken");
+    foods.remove(food);
+  }
+  print("Action completed");
 }

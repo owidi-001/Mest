@@ -24,7 +24,7 @@ class _MainPageState extends State<MainPage> {
           LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
               return Container(
-                height: constraints.maxHeight / 2,
+                height: constraints.maxHeight / 1.8,
                 width: MediaQuery.of(context).size.width,
                 color: AppTheme.primaryColor,
               );

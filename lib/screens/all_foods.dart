@@ -12,42 +12,57 @@ class AllFoods extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
-           SliverAppBar(
-            backgroundColor: AppTheme.primaryColor,
-              expandedHeight: 200.0,
-              floating: false,
-              pinned: true,
-              flexibleSpace: FlexibleSpaceBar(
-                  centerTitle: true,
-                  title: const Text("Meal Suggester",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16.0,
-                      )),
-                  background: Image.asset(
-                    "${baseUrl}app_img_1.png",
-                    fit: BoxFit.cover,
-                  )),
-            ),
-          const SliverToBoxAdapter(
+          SliverToBoxAdapter(
             child: SizedBox(
-              height: 24,
+              height: 28,
+              child: Container(
+                color: AppTheme.primaryColor,
+              ),
             ),
           ),
+          SliverAppBar(
+            backgroundColor: AppTheme.primaryColor,
+            expandedHeight: 200.0,
+            floating: false,
+            pinned: true,
+            flexibleSpace: FlexibleSpaceBar(
+                centerTitle: true,
+                title: const Text("Meal Suggester",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16.0,
+                    )),
+                background: Image.asset(
+                  "${baseUrl}app_img_1.png",
+                  fit: BoxFit.cover,
+                )),
+          ),
+          SliverToBoxAdapter(
+              child: Container(
+            padding: const EdgeInsets.only(top: 16.0, bottom: 10, left: 16),
+            child: const Text(
+              "All Saved Foods",
+              style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: AppTheme.secondaryColor),
+            ),
+          )),
           SliverList(
               delegate: SliverChildBuilderDelegate(((
             context,
             index,
           ) {
             return Card(
-              margin: const EdgeInsets.only(top: 8.0,left: 16,right: 16),
+              margin: const EdgeInsets.only(
+                  top: 8.0, left: 16, right: 16, bottom: 16),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16.0),
+                borderRadius: BorderRadius.circular(8.0),
               ),
+              color: AppTheme.lightColor,
               child: FoodCardWidgetHorizontal(
                   food: foods[index],
                   onTapCallback: () => {
@@ -61,6 +76,6 @@ class AllFoods extends StatelessWidget {
           }), childCount: foods.length))
         ],
       ),
-    ));
+    );
   }
 }
