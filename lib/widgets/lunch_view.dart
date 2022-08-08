@@ -7,8 +7,6 @@ class LunchView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: FoodCard(foods: allLunch())
-    );
+    return FoodCard(foods: allLunch());
   }
 }

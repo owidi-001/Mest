@@ -9,8 +9,7 @@ class RatingBox extends StatefulWidget {
 }
 
 class _RatingBoxState extends State<RatingBox> {
-  int _ratingBarMode = 1;
-  double _initialRating = 2.0;
+  final double _initialRating = 1.0;
 
   @override
   void initState() {

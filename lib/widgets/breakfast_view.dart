@@ -7,8 +7,6 @@ class BreakFastView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: FoodCard(foods: allBreakFast())
-    );
+    return FoodCard(foods: allBreakFast());
   }
 }

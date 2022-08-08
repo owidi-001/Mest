@@ -1,14 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:mest/screens/all_foods.dart';
 import 'package:mest/screens/favourite_foods.dart';
 import 'package:mest/screens/home.dart';
 import 'package:mest/screens/new_food.dart';
 import 'package:mest/theme/theme.dart';
-import 'package:mest/widgets/bottom_navigation.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);

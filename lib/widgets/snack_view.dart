@@ -7,8 +7,6 @@ class SnackView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: FoodCard(foods: allSnack())
-    );
+    return FoodCard(foods: allSnack());
   }
 }

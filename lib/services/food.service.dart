@@ -140,10 +140,7 @@ Food randomFood(List<Food> foods) {
 }
 
 void deleteFood(Food food) {
-  print("Delete button pressed");
   if (foods.contains(food)) {
-    print("Action being taken");
     foods.remove(food);
   }
-  print("Action completed");
 }
