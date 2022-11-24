@@ -1,33 +1,58 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mest/presentation/history/history_info.dart';
+import 'package:mest/presentation/home/home.dart';
+import 'package:mest/presentation/menu/menu_plan.dart';
 import 'package:mest/theme/theme.dart';
 
-class BottomAppNavigation extends StatefulWidget {
-  const BottomAppNavigation({Key? key}) : super(key: key);
+class BottomNavigation extends StatefulWidget {
+  const BottomNavigation({super.key});
 
   @override
-  State<BottomAppNavigation> createState() => _BottomAppNavigationState();
+  State<BottomNavigation> createState() => _BottomNavigationState();
 }
 
-class _BottomAppNavigationState extends State<BottomAppNavigation> {
+class _BottomNavigationState extends State<BottomNavigation> {
+  int _selectedIndex = 0;
+
+  Widget body() {
+    switch (_selectedIndex) {
+      case 0:
+        return const HomeScreen();
+      case 1:
+        return const PlanScreen();
+      case 2:
+        return const HistoryScreen();
+      default:
+        return const HomeScreen();
+    }
+  }
+
+  void _updateIndex(int value) {
+    setState(() {
+      _selectedIndex = value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      selectedItemColor: AppTheme.primaryColor,
-      unselectedItemColor: AppTheme.secondaryColor,
-      showUnselectedLabels: false,
-      selectedLabelStyle: const TextStyle(color: AppTheme.primaryColor),
-      items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home_filled),
-          label: "Home"),
-          BottomNavigationBarItem(icon: Icon(CupertinoIcons.bookmark_solid),
-          label: "Saved"),
-          BottomNavigationBarItem(icon: Icon(CupertinoIcons.pencil_ellipsis_rectangle),
-          label: "New"),
-          BottomNavigationBarItem(icon: Icon(CupertinoIcons.list_bullet),
-          label: "All"),
-      ]
-      );
+    return Scaffold(
+      body: body(),
+      bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: AppTheme.primary,
+        showUnselectedLabels: true,
+        enableFeedback: true,
+        currentIndex: _selectedIndex,
+        onTap: _updateIndex,
+        items: const [
+          BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.circle_grid_hex), label: "home"),
+          BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.table_badge_more_fill), label: "plan"),
+          BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.time_solid), label: "history"),
+        ],
+      ),
+    );
   }
 }

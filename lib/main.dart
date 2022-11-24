@@ -1,28 +1,55 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:mest/home.dart';
-import 'package:mest/screens/new_food.dart';
-import 'package:mest/utils/routes.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mest/presentation/history/history_info.dart';
+import 'package:mest/presentation/home/home.dart';
+import 'package:mest/presentation/intro/splash.dart';
+import 'package:mest/presentation/menu/menu_plan.dart';
+import 'package:mest/routes/routes.dart';
+import 'package:mest/widgets/bottom_navigation.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(App());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+/// The route configuration.
+final GoRouter _router = GoRouter(
+  routes: <RouteBase>[
+    GoRoute(
+      path: AppRoute.splash,
+      builder: (BuildContext context, GoRouterState state) {
+        return const SplashScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoute.home,
+      builder: (BuildContext context, GoRouterState state) {
+        return const BottomNavigation();
+      },
+      routes: <RouteBase>[
+        GoRoute(
+          path: AppRoute.plan,
+          builder: (BuildContext context, GoRouterState state) {
+            return const PlanScreen();
+          },
+        ),
+        GoRoute(
+          path: AppRoute.history,
+          builder: (BuildContext context, GoRouterState state) {
+            return const HistoryScreen();
+          },
+        ),
+      ],
+    ),
+  ],
+);
 
-  // This widget is the root of your application.
+class App extends StatelessWidget {
+  App({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Mest',
-      theme: ThemeData(fontFamily: GoogleFonts.lato().fontFamily),
-      // initialRoute: '/',
-      routes: {
-        // "/":(context) => const MyHomePage(),
-        CustomRoutes.newFood: (context) => const NewFood(),
-      },
-      home:  const Home()
+    return MaterialApp.router(
+      routerConfig: _router,
     );
   }
 }
