@@ -29,7 +29,7 @@ final GoRouter _router = GoRouter(
         GoRoute(
           path: AppRoute.plan,
           builder: (BuildContext context, GoRouterState state) {
-            return const PlanScreen();
+            return const MenuScreen();
           },
         ),
         GoRoute(

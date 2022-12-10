@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mest/presentation/create/create.dart';
 import 'package:mest/presentation/history/history_info.dart';
 import 'package:mest/presentation/home/home.dart';
 import 'package:mest/presentation/menu/menu_plan.dart';
@@ -20,7 +21,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
       case 0:
         return const HomeScreen();
       case 1:
-        return const PlanScreen();
+        return const MenuScreen();
       case 2:
         return const HistoryScreen();
       default:
@@ -41,6 +42,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: AppTheme.primary,
         showUnselectedLabels: true,
+        unselectedItemColor: AppTheme.secondary,
         enableFeedback: true,
         currentIndex: _selectedIndex,
         onTap: _updateIndex,
@@ -48,7 +50,7 @@ class _BottomNavigationState extends State<BottomNavigation> {
           BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.circle_grid_hex), label: "home"),
           BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.table_badge_more_fill), label: "plan"),
+              icon: Icon(CupertinoIcons.table_badge_more_fill), label: "menu"),
           BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.time_solid), label: "history"),
         ],

@@ -26,11 +26,53 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.5,
+                decoration: const BoxDecoration(
+                  color: AppTheme.gradient,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(12),
+                  ),
+                ),
+                child: Center(
+                  child: Stack(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(10.0),
+                        child: Image.asset("assets/images/1.png"),
+                      ),
+                      Positioned(
+                        bottom: 10,
+                        right: 10,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            // Navigator.pushReplacementNamed(
+                            //     context, AppRoute.login);
+                          },
+                          style: TextButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 8, horizontal: 12),
+                            textStyle: const TextStyle(
+                                fontSize: 14, fontWeight: FontWeight.w500),
+                            shape: const StadiumBorder(),
+                            backgroundColor: AppTheme.secondary,
+                          ),
+                          child: const Text("Pick this"),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )),
+          Positioned(
             bottom: 0,
             left: 0,
             right: 0,
             child: Container(
-              height: MediaQuery.of(context).size.height * 0.5,
+              height: MediaQuery.of(context).size.height * 0.4,
               decoration: const BoxDecoration(
                 color: AppTheme.whiteColor,
                 borderRadius: BorderRadius.all(
@@ -44,89 +86,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(
-                        height: 24,
-                      ),
-                      Container(
-                        decoration: const BoxDecoration(
-                          color: AppTheme.gradient,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(12),
-                          ),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            TextButton.icon(
-                              onPressed: () => {},
-                              icon: const Icon(
-                                Icons.coffee_maker_outlined,
-                                color: AppTheme.primary,
-                                size: 16,
-                              ),
-                              label: const Text(
-                                "Tea",
-                                style: TextStyle(
-                                    color: AppTheme.secondary,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ),
-                            const Text(
-                              "|",
-                              style: TextStyle(
-                                  color: AppTheme.secondary,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            TextButton.icon(
-                              onPressed: () => {},
-                              icon: const Icon(
-                                Icons.fastfood,
-                                color: AppTheme.primary,
-                                size: 16,
-                              ),
-                              label: const Text(
-                                "Snack",
-                                style: TextStyle(
-                                    color: AppTheme.secondary,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ),
-                            const Text(
-                              "|",
-                              style: TextStyle(
-                                  color: AppTheme.secondary,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            TextButton.icon(
-                              onPressed: () => {},
-                              icon: const Icon(
-                                Icons.food_bank_outlined,
-                                color: AppTheme.primary,
-                                size: 16,
-                              ),
-                              label: const Text(
-                                "Main",
-                                style: TextStyle(
-                                    color: AppTheme.secondary,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 24,
-                      ),
                       const Text(
                         "Boneless Chicken",
                         style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold,color: AppTheme.primary),
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: AppTheme.primary),
                       ),
                       const SizedBox(
                         height: 20,
@@ -148,22 +113,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       const SizedBox(
                         height: 8,
                       ),
-                      FractionallySizedBox(
-                        widthFactor: 0.5,
-                        child: ElevatedButton(
-                            onPressed: () {
-                              // Navigator.pushReplacementNamed(
-                              //     context, AppRoute.login);
-                            },
-                            style: TextButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(vertical: 8),
-                              textStyle: const TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.w500),
-                              shape: const StadiumBorder(),
-                              backgroundColor: AppTheme.secondary,
-                            ),
-                            child: const Text("Eat this")),
-                      )
                     ],
                   ),
                 ),
