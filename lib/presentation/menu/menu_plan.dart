@@ -116,14 +116,39 @@ class _MenuScreenState extends State<MenuScreen> {
                     ],
                   ),
                   Row(
+                    children: const [
+                      Icon(
+                        Icons.info,
+                        color: AppTheme.primary,
+                      ),
+                      SizedBox(width: 12,),
+                      Text(
+                        'Take Square photos [1:1]',
+                        style: TextStyle(
+                            color: AppTheme.secondary,
+                            fontWeight: FontWeight.normal,
+                            fontSize: 12),
+                      ),
+                    ],
+                  ),
+                  Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       TextButton.icon(
                         onPressed: () async {
+                          // ScaffoldMessenger.of(context)
+                          //     .showSnackBar(const SnackBar(
+                          //   content: Text('Take Square photos [1:1]'),
+                          // ));
+
                           // Pick an image
                           image = await _picker.pickImage(
-                              source: ImageSource.camera);
+                              source: ImageSource.camera,
+                              // Compress image upload
+                              maxHeight: 1024,
+                              maxWidth: 1024,
+                              imageQuality: 50);
                           setState(() {});
                         },
                         icon: const Icon(
@@ -258,7 +283,7 @@ class _MenuScreenState extends State<MenuScreen> {
                 _showForm(null);
               }),
               child: const CircleAvatar(
-                backgroundColor: AppTheme.gradient,
+                  backgroundColor: AppTheme.gradient,
                   child: Icon(CupertinoIcons.add_circled_solid))),
           const SizedBox(
             width: 18,
