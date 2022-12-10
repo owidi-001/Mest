@@ -121,7 +121,9 @@ class _MenuScreenState extends State<MenuScreen> {
                         Icons.info,
                         color: AppTheme.primary,
                       ),
-                      SizedBox(width: 12,),
+                      SizedBox(
+                        width: 12,
+                      ),
                       Text(
                         'Take Square photos [1:1]',
                         style: TextStyle(
@@ -137,11 +139,6 @@ class _MenuScreenState extends State<MenuScreen> {
                     children: <Widget>[
                       TextButton.icon(
                         onPressed: () async {
-                          // ScaffoldMessenger.of(context)
-                          //     .showSnackBar(const SnackBar(
-                          //   content: Text('Take Square photos [1:1]'),
-                          // ));
-
                           // Pick an image
                           image = await _picker.pickImage(
                               source: ImageSource.camera,
