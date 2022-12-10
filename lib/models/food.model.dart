@@ -20,10 +20,21 @@ class Food {
       required this.created});
 
   factory Food.fromMap(Map<String, dynamic> item) {
+    // TODO! make sure it aligns
+
+    String name =
+        item["name"].toString().length > item["image"].toString().length
+            ? item["image"]
+            : item["name"];
+    String image =
+        item["name"].toString().length > item["image"].toString().length
+            ? item["name"]
+            : item["image"];
+
     return Food(
         id: item["id"],
-        name: item["name"],
-        image: item["image"],
+        name: name,
+        image: image,
         description: item["description"],
         created: item["created"]);
   }

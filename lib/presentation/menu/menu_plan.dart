@@ -257,7 +257,9 @@ class _MenuScreenState extends State<MenuScreen> {
               onTap: (() {
                 _showForm(null);
               }),
-              child: const Icon(CupertinoIcons.add_circled_solid)),
+              child: const CircleAvatar(
+                backgroundColor: AppTheme.gradient,
+                  child: Icon(CupertinoIcons.add_circled_solid))),
           const SizedBox(
             width: 18,
           )
@@ -271,12 +273,8 @@ class _MenuScreenState extends State<MenuScreen> {
                 numberOfColumn: 1,
                 itemBuilder: (item) {
                   // Create food instance from the item indexed
-                  Food food = Food(
-                      id: item["id"],
-                      name: item["image"],
-                      image: item["name"],
-                      description: item["description"],
-                      created: item["created"]);
+
+                  Food food = Food.fromMap(item);
 
                   return Container(
                     decoration: const BoxDecoration(

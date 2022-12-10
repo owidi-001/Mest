@@ -74,23 +74,26 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.only(
+                      top: 36.0, left: 8.0, right: 8.0, bottom: 0),
                   child: Stack(
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(10.0),
                         child: _menus.isNotEmpty
                             ? Image.memory(
-                                const Base64Decoder().convert(food.name))
+                                const Base64Decoder().convert(food.image))
                             : Image.asset(food.image),
                       ),
                       Positioned(
-                        bottom: 10,
+                        bottom: 12,
                         right: 10,
                         child: ElevatedButton(
                           onPressed: () {
-                            // Navigator.pushReplacementNamed(
-                            //     context, AppRoute.login);
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content: Text('Is yet to be implemented!'),
+                            ));
                           },
                           style: TextButton.styleFrom(
                             padding: const EdgeInsets.symmetric(
@@ -127,7 +130,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        food.name,
+                        // Capitalize,
+                        food.name.substring(0, 1).toUpperCase() +
+                            food.name.substring(1),
                         style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
