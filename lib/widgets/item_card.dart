@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:mest/models/food.model.dart';
 import 'package:mest/theme/theme.dart';
@@ -19,7 +21,13 @@ class MenuCard extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(10.0),
-            child: Image.asset(food.image),
+            child: food.image.isNotEmpty
+                ? Image.memory(const Base64Decoder().convert(food.image))
+                : Container(
+                    decoration: BoxDecoration(
+                        color: AppTheme.primary,
+                        borderRadius: BorderRadius.circular(12)),
+                  ),
           ),
           Padding(
             padding:

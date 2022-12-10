@@ -1,5 +1,10 @@
+import 'dart:convert';
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mest/database/helper.dart';
+import 'package:mest/models/food.model.dart';
 import 'package:mest/theme/theme.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -11,6 +16,37 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool isReadmore = false;
+
+  // Initialize db items
+  // All menu
+  List<Map<String, dynamic>> _menus = [];
+  Food food = Food.empty();
+
+  bool _isLoading = true;
+
+  void _randomMenu() async {
+    final data = await SQLHelper.getMenu();
+
+    setState(() {
+      _menus = data;
+      _isLoading = false;
+
+      // Set random menu
+      if (_menus.isNotEmpty) {
+        Random random = Random();
+        food = Food.fromMap(
+            _menus[random.nextInt(_menus.length)]); // Create food from map
+      } else {
+        food = Food.empty();
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _randomMenu(); // loads menu when app starts
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +73,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     Radius.circular(12),
                   ),
                 ),
-                child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
                   child: Stack(
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(10.0),
-                        child: Image.asset("assets/images/1.png"),
+                        child: _menus.isNotEmpty
+                            ? Image.memory(
+                                const Base64Decoder().convert(food.name))
+                            : Image.asset(food.image),
                       ),
                       Positioned(
                         bottom: 10,
@@ -86,9 +126,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        "Boneless Chicken",
-                        style: TextStyle(
+                      Text(
+                        food.name,
+                        style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: AppTheme.primary),
@@ -96,8 +136,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       const SizedBox(
                         height: 20,
                       ),
-                      buildDescription(
-                          "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like)."),
+                      buildDescription(food.description),
                       TextButton(
                         onPressed: () {
                           setState(() {
@@ -122,7 +161,11 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       floatingActionButton: FloatingActionButton.small(
-        onPressed: () => {},
+        onPressed: () => {
+          setState(() {
+            _randomMenu();
+          })
+        },
         backgroundColor: AppTheme.primary,
         foregroundColor: AppTheme.whiteColor,
         child: const Icon(CupertinoIcons.shuffle_thick),

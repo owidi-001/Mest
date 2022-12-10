@@ -6,8 +6,8 @@ class SQLHelper {
   static Future<void> createTables(sql.Database database) async {
     const String query = """ CREATE TABLE menu(
       id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-      image TEXT,
       name TEXT,
+      image TEXT,
       description TEXT,
       created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
     ) """;
@@ -27,7 +27,7 @@ class SQLHelper {
       String? image, String? name, String? description) async {
     final db = await SQLHelper.db();
 
-    final data = {"image": image, "name": name, "description": description};
+    final data = {"name": name, "image": image, "description": description};
 
     final id = await db.insert("menu", data,
         conflictAlgorithm: sql.ConflictAlgorithm.replace);
@@ -51,10 +51,10 @@ class SQLHelper {
 
   // update item
   static Future<int> updateItem(
-      int id, String? name, String? image, String? description) async {
+      int id, String? name, String? description) async {
     final db = await SQLHelper.db();
 
-    final data = {"image": image, "name": name, "description": description};
+    final data = {"name": name, "description": description};
 
     final result =
         await db.update("menu", data, where: "id = ?", whereArgs: [id]);

@@ -1,7 +1,13 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masonry_view/flutter_masonry_view.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mest/database/helper.dart';
+import 'package:mest/models/food.model.dart';
 import 'package:mest/theme/theme.dart';
 import 'package:mest/widgets/form_field.dart';
 
@@ -14,64 +20,14 @@ class MenuScreen extends StatefulWidget {
 
 class _MenuScreenState extends State<MenuScreen> {
   // All menu
-  List<Map<String, dynamic>> _menus = [
-    {
-      "name": "Chicken",
-      "description": "The quick brown fox",
-      "image": 'assets/images/1.png',
-    },
-    {
-      "name": "Chicken",
-      "description": "The quick brown fox",
-      "image": 'assets/images/2.png',
-    },
-    {
-      "name": "Chicken",
-      "description": "The quick brown fox",
-      "image": 'assets/images/3.png',
-    },
-    {
-      "name": "Chicken",
-      "description": "The quick brown fox",
-      "image": 'assets/images/4.png',
-    },
-    {
-      "name": "Chicken",
-      "description": "The quick brown fox",
-      "image": 'assets/images/5.png',
-    },
-    {
-      "name": "Chicken",
-      "description": "The quick brown fox",
-      "image": 'assets/images/6.png',
-    },
-    {
-      "name": "Chicken",
-      "description": "The quick brown fox",
-      "image": 'assets/images/7.png',
-    },
-    {
-      "name": "Chicken",
-      "description": "The quick brown fox",
-      "image": 'assets/images/8.png',
-    },
-    {
-      "name": "Chicken",
-      "description": "The quick brown fox",
-      "image": 'assets/images/9.png',
-    },
-    {
-      "name": "Chicken",
-      "description": "The quick brown fox",
-      "image": 'assets/images/10.png',
-    }
-  ];
+  List<Map<String, dynamic>> _menus = [];
 
   bool _isLoading = true;
 
   // This function is used to fetch all data from the database
   void _refreshMenu() async {
     final data = await SQLHelper.getMenu();
+
     setState(() {
       _menus = data;
       _isLoading = false;
@@ -86,8 +42,10 @@ class _MenuScreenState extends State<MenuScreen> {
 
   // Form fields
   final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _imageController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
+
+  final ImagePicker _picker = ImagePicker();
+  XFile? image;
 
   // This function will be triggered when the floating button is pressed
   // It will also be triggered when you want to update an item
@@ -97,7 +55,6 @@ class _MenuScreenState extends State<MenuScreen> {
       // id != null -> update an existing item
       final existingMenu = _menus.firstWhere((element) => element['id'] == id);
       _nameController.text = existingMenu['name'];
-      _imageController.text = existingMenu['image'];
       _descriptionController.text = existingMenu['description'];
     }
 
@@ -163,9 +120,11 @@ class _MenuScreenState extends State<MenuScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       TextButton.icon(
-                        onPressed: () {
-                          //     pickImage(ImageSource.camera);
-                          //     Navigator.pop(context);
+                        onPressed: () async {
+                          // Pick an image
+                          image = await _picker.pickImage(
+                              source: ImageSource.camera);
+                          setState(() {});
                         },
                         icon: const Icon(
                           Icons.photo,
@@ -177,9 +136,10 @@ class _MenuScreenState extends State<MenuScreen> {
                         ),
                       ),
                       TextButton.icon(
-                        onPressed: () {
-                          //     pickImage(ImageSource.gallery);
-                          //     Navigator.pop(context);
+                        onPressed: () async {
+                          image = await _picker.pickImage(
+                              source: ImageSource.gallery);
+                          setState(() {});
                         },
                         icon: const Icon(
                           Icons.photo,
@@ -205,23 +165,22 @@ class _MenuScreenState extends State<MenuScreen> {
               borderRadius: const BorderRadius.all(Radius.circular(10)),
               color: AppTheme.primary,
               child: MaterialButton(
-                onPressed: () async{
+                onPressed: () async {
                   // Save new journal
-                if (id == null) {
-                  await _addMenu();
-                }
+                  if (id == null) {
+                    await _addMenu();
+                  }
 
-                if (id != null) {
-                  await _updateMenu(id);
-                }
+                  if (id != null) {
+                    await _updateMenu(id);
+                  }
 
-                // Clear the text fields
-                _nameController.text = '';
-                _imageController.text = '';
-                _descriptionController.text = '';
+                  // Clear the text fields
+                  _nameController.text = '';
+                  _descriptionController.text = '';
 
-                // Close the bottom sheet
-                Navigator.of(context).pop();
+                  // Close the bottom sheet
+                  Navigator.of(context).pop();
                 },
                 padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
                 minWidth: double.infinity,
@@ -242,15 +201,37 @@ class _MenuScreenState extends State<MenuScreen> {
 
   // Insert a new journal to the database
   Future<void> _addMenu() async {
-    await SQLHelper.createItem(_nameController.text, _imageController.text,
-        _descriptionController.text);
-    _refreshMenu();
+    if (image != null) {
+      // convert image to base64
+      String imageData = "";
+
+      File imagefile = File(image!.path); //convert Path to File
+      Uint8List imagebytes = await imagefile.readAsBytes(); //convert to bytes
+      imageData = base64.encode(imagebytes); //convert bytes to base64 string
+
+      if (kDebugMode) {
+        print("The picked image is");
+        print(imageData);
+      }
+
+      await SQLHelper.createItem(
+          _nameController.text, imageData, _descriptionController.text);
+      _refreshMenu();
+
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Menu added successfully!'),
+      ));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('No image selected!'),
+      ));
+    }
   }
 
   // Update an existing journal
   Future<void> _updateMenu(int id) async {
-    await SQLHelper.updateItem(id, _nameController.text, _imageController.text,
-        _descriptionController.text);
+    await SQLHelper.updateItem(
+        id, _nameController.text, _descriptionController.text);
     _refreshMenu();
   }
 
@@ -265,19 +246,6 @@ class _MenuScreenState extends State<MenuScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final _items = [
-      'assets/images/1.png',
-      'assets/images/2.png',
-      'assets/images/3.png',
-      'assets/images/4.png',
-      'assets/images/5.png',
-      'assets/images/6.png',
-      'assets/images/7.png',
-      'assets/images/8.png',
-      'assets/images/9.png',
-      'assets/images/10.png'
-    ];
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppTheme.primary,
@@ -295,56 +263,102 @@ class _MenuScreenState extends State<MenuScreen> {
           )
         ],
       ),
+
       body: SingleChildScrollView(
-        child: MasonryView(
-          listOfItem: _items,
-          numberOfColumn: 1,
-          itemBuilder: (item) {
-            return Container(
-              decoration: const BoxDecoration(
-                color: AppTheme.gradient,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(12),
+        child: _menus.isNotEmpty
+            ? MasonryView(
+                listOfItem: _menus,
+                numberOfColumn: 1,
+                itemBuilder: (item) {
+                  // Create food instance from the item indexed
+                  Food food = Food(
+                      id: item["id"],
+                      name: item["image"],
+                      image: item["name"],
+                      description: item["description"],
+                      created: item["created"]);
+
+                  return Container(
+                    decoration: const BoxDecoration(
+                      color: AppTheme.gradient,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(12),
+                      ),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        _showForm(food.id);
+                      },
+                      child: Stack(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(10.0),
+                            child: food.image.toString().isNotEmpty
+                                ? Image.memory(
+                                    const Base64Decoder().convert(food.image),
+                                  )
+                                : Container(
+                                    decoration: BoxDecoration(
+                                        color: AppTheme.primary,
+                                        borderRadius:
+                                            BorderRadius.circular(12)),
+                                  ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16.0, vertical: 10.0),
+                            child: Text(
+                              food.name,
+                              style: const TextStyle(
+                                  color: AppTheme.primary,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          Positioned(
+                            bottom: 10,
+                            right: 10,
+                            child: CircleAvatar(
+                              backgroundColor: AppTheme.danger,
+                              child: InkWell(
+                                onTap: (() async {
+                                  await SQLHelper.deleteItem(food.id);
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(const SnackBar(
+                                    content: Text('Menu removed!'),
+                                  ));
+                                  _refreshMenu();
+                                }),
+                                child: const Icon(
+                                  Icons.delete,
+                                  color: AppTheme.whiteColor,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              )
+            : Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const SizedBox(
+                      height: 100,
+                    ),
+                    const Text("You don't have any item saved"),
+                    TextButton(
+                        onPressed: (() => _showForm(null)),
+                        child: const Text("Add menu"))
+                  ],
                 ),
               ),
-              child: Stack(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(10.0),
-                    child: Image.asset(item),
-                  ),
-                  const Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-                    child: Text(
-                      "Chicken",
-                      style: TextStyle(
-                          color: AppTheme.primary,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  Positioned(
-                      bottom: 10,
-                      right: 10,
-                      child: CircleAvatar(
-                        backgroundColor: AppTheme.primary,
-                        child: InkWell(
-                          onTap: (() {
-                            _showForm(1);
-                          }),
-                          child: const Icon(
-                            Icons.edit,
-                            color: AppTheme.whiteColor,
-                          ),
-                        ),
-                      ))
-                ],
-              ),
-            );
-          },
-        ),
       ),
+
       // floatingActionButton: FloatingActionButton.small(
       //   onPressed: () => {},
       //   backgroundColor: AppTheme.primary,
