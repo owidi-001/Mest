@@ -39,11 +39,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: body(),
-      
       bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: AppTheme.primary,
+        selectedItemColor: AppTheme.gold,
         showUnselectedLabels: true,
-        unselectedItemColor: AppTheme.secondary,
+        unselectedItemColor: AppTheme.gray,
         enableFeedback: true,
         currentIndex: _selectedIndex,
         onTap: _updateIndex,

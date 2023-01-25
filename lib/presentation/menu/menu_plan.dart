@@ -94,7 +94,7 @@ class _MenuScreenState extends State<MenuScreen> {
             Container(
               height: MediaQuery.of(context).size.height * 0.2,
               decoration: const BoxDecoration(
-                  color: AppTheme.whiteColor,
+                  color: AppTheme.light,
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10))),
@@ -109,7 +109,7 @@ class _MenuScreenState extends State<MenuScreen> {
                       Text(
                         "Pick Image from",
                         style: TextStyle(
-                            color: AppTheme.primary,
+                            color: AppTheme.gold,
                             fontWeight: FontWeight.bold,
                             fontSize: 18),
                       ),
@@ -119,7 +119,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     children: const [
                       Icon(
                         Icons.info,
-                        color: AppTheme.primary,
+                        color: AppTheme.gold,
                       ),
                       SizedBox(
                         width: 12,
@@ -127,7 +127,7 @@ class _MenuScreenState extends State<MenuScreen> {
                       Text(
                         'Take Square photos [1:1]',
                         style: TextStyle(
-                            color: AppTheme.secondary,
+                            color: AppTheme.gray,
                             fontWeight: FontWeight.normal,
                             fontSize: 12),
                       ),
@@ -150,11 +150,11 @@ class _MenuScreenState extends State<MenuScreen> {
                         },
                         icon: const Icon(
                           Icons.photo,
-                          color: AppTheme.primary,
+                          color: AppTheme.gold,
                         ),
                         label: const Text(
                           "Camera",
-                          style: TextStyle(color: AppTheme.primary),
+                          style: TextStyle(color: AppTheme.gold),
                         ),
                       ),
                       TextButton.icon(
@@ -165,11 +165,11 @@ class _MenuScreenState extends State<MenuScreen> {
                         },
                         icon: const Icon(
                           Icons.photo,
-                          color: AppTheme.primary,
+                          color: AppTheme.gold,
                         ),
                         label: const Text(
                           "Gallery",
-                          style: TextStyle(color: AppTheme.primary),
+                          style: TextStyle(color: AppTheme.gold),
                         ),
                       ),
                     ],
@@ -185,7 +185,7 @@ class _MenuScreenState extends State<MenuScreen> {
             Material(
               elevation: 5,
               borderRadius: const BorderRadius.all(Radius.circular(10)),
-              color: AppTheme.primary,
+              color: AppTheme.gold,
               child: MaterialButton(
                 onPressed: () async {
                   // Save new journal
@@ -209,7 +209,7 @@ class _MenuScreenState extends State<MenuScreen> {
                 child: Text(
                   id == null ? 'Create New' : 'Update',
                   style: const TextStyle(
-                      color: AppTheme.whiteColor,
+                      color: AppTheme.light,
                       fontWeight: FontWeight.bold,
                       fontSize: 18),
                 ),
@@ -270,7 +270,7 @@ class _MenuScreenState extends State<MenuScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppTheme.primary,
+        backgroundColor: AppTheme.gold,
         // leading: ,
         title: const Text("Menu"),
         centerTitle: true,
@@ -280,7 +280,7 @@ class _MenuScreenState extends State<MenuScreen> {
                 _showForm(null);
               }),
               child: const CircleAvatar(
-                  backgroundColor: AppTheme.gradient,
+                  backgroundColor: AppTheme.gold,
                   child: Icon(CupertinoIcons.add_circled_solid))),
           const SizedBox(
             width: 18,
@@ -300,7 +300,7 @@ class _MenuScreenState extends State<MenuScreen> {
 
                   return Container(
                     decoration: const BoxDecoration(
-                      color: AppTheme.gradient,
+                      color: AppTheme.gold,
                       borderRadius: BorderRadius.all(
                         Radius.circular(12),
                       ),
@@ -319,7 +319,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                   )
                                 : Container(
                                     decoration: BoxDecoration(
-                                        color: AppTheme.primary,
+                                        color: AppTheme.gold,
                                         borderRadius:
                                             BorderRadius.circular(12)),
                                   ),
@@ -330,7 +330,7 @@ class _MenuScreenState extends State<MenuScreen> {
                             child: Text(
                               food.name,
                               style: const TextStyle(
-                                  color: AppTheme.primary,
+                                  color: AppTheme.gold,
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold),
                             ),
@@ -339,7 +339,7 @@ class _MenuScreenState extends State<MenuScreen> {
                             bottom: 10,
                             right: 10,
                             child: CircleAvatar(
-                              backgroundColor: AppTheme.danger,
+                              backgroundColor: AppTheme.red,
                               child: InkWell(
                                 onTap: (() async {
                                   await SQLHelper.deleteItem(food.id);
@@ -351,7 +351,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                 }),
                                 child: const Icon(
                                   Icons.delete,
-                                  color: AppTheme.whiteColor,
+                                  color: AppTheme.light,
                                 ),
                               ),
                             ),
@@ -381,8 +381,8 @@ class _MenuScreenState extends State<MenuScreen> {
 
       // floatingActionButton: FloatingActionButton.small(
       //   onPressed: () => {},
-      //   backgroundColor: AppTheme.primary,
-      //   foregroundColor: AppTheme.whiteColor,
+      //   backgroundColor: AppTheme.gold,
+      //   foregroundColor: AppTheme.light,
       //   child: const Icon(CupertinoIcons.add_circled_solid),
       // ),
     );

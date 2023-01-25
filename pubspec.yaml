@@ -40,6 +40,10 @@ dependencies:
   flutter_masonry_view: ^0.0.2
   image_picker: ^0.8.6
   flutter_launcher_icons: ^0.11.0
+  animated_text_kit: ^4.2.2
+  shared_preferences: ^2.0.17
+  tbib_splash_screen: ^0.0.6
+  shimmer: ^2.0.0
 
 flutter_icons:
   android: "launcher_icon"
@@ -73,6 +77,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/illustrators/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

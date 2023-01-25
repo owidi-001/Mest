@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mest/presentation/create/create.dart';
 import 'package:mest/presentation/history/history_info.dart';
 import 'package:mest/presentation/home/home.dart';
 import 'package:mest/presentation/menu/menu_plan.dart';
@@ -39,11 +38,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: body(),
-      
       bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: AppTheme.primary,
+        selectedItemColor: AppTheme.gold,
         showUnselectedLabels: true,
-        unselectedItemColor: AppTheme.secondary,
+        unselectedItemColor: AppTheme.gray,
         enableFeedback: true,
         currentIndex: _selectedIndex,
         onTap: _updateIndex,

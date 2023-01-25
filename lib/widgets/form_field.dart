@@ -15,7 +15,7 @@ Material appButton(String title, Function() function) {
   return Material(
     elevation: 5,
     borderRadius: const BorderRadius.all(Radius.circular(10)),
-    color: AppTheme.primary,
+    color: AppTheme.gold,
     child: MaterialButton(
       onPressed: function,
       padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
@@ -23,9 +23,7 @@ Material appButton(String title, Function() function) {
       child: Text(
         title,
         style: const TextStyle(
-            color: AppTheme.whiteColor,
-            fontWeight: FontWeight.bold,
-            fontSize: 18),
+            color: AppTheme.light, fontWeight: FontWeight.bold, fontSize: 18),
       ),
     ),
   );

@@ -1,11 +1,10 @@
-import 'dart:convert';
-import 'dart:math';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mest/database/helper.dart';
 import 'package:mest/models/food.model.dart';
+import 'package:mest/theme/font.dart';
 import 'package:mest/theme/theme.dart';
+import 'package:mest/utils/constants.dart';
+import 'package:mest/widgets/category_tile.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,184 +14,210 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool isReadmore = false;
-
-  // Initialize db items
-  // All menu
   List<Map<String, dynamic>> _menus = [];
-  Food food = Food.empty();
+  bool _isLoaded = true;
 
-  bool _isLoading = true;
-
-  void _randomMenu() async {
+  void _readMenu() async {
     final data = await SQLHelper.getMenu();
 
     setState(() {
       _menus = data;
-      _isLoading = false;
-
-      // Set random menu
-      if (_menus.isNotEmpty) {
-        Random random = Random();
-        food = Food.fromMap(
-            _menus[random.nextInt(_menus.length)]); // Create food from map
-      } else {
-        food = Food.empty();
-      }
+      _isLoaded = false;
     });
   }
 
   @override
   void initState() {
     super.initState();
-    _randomMenu(); // loads menu when app starts
+    _readMenu(); // loads menu when app starts
   }
 
   @override
   Widget build(BuildContext context) {
+    // List of category types
+    List<FoodCategory> categories = List.generate(
+        3,
+        (index) => FoodCategory(
+            name: "Snacks", icon: const Icon(Icons.food_bank_rounded)));
+
+    List<Color> colors = [AppTheme.red, AppTheme.gold, AppTheme.blue];
+
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage("assets/images/home_bg.png"),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              child: Container(
-                height: MediaQuery.of(context).size.height * 0.5,
-                decoration: const BoxDecoration(
-                  color: AppTheme.gradient,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(12),
-                  ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                      top: 36.0, left: 8.0, right: 8.0, bottom: 0),
-                  child: Stack(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(10.0),
-                        child: _menus.isNotEmpty
-                            ? Image.memory(
-                                const Base64Decoder().convert(food.image))
-                            : Image.asset(food.image),
-                      ),
-                      Positioned(
-                        bottom: 12,
-                        right: 10,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
-                              content: Text('Is yet to be implemented!'),
-                            ));
-                          },
-                          style: TextButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 8, horizontal: 12),
-                            textStyle: const TextStyle(
-                                fontSize: 14, fontWeight: FontWeight.w500),
-                            shape: const StadiumBorder(),
-                            backgroundColor: AppTheme.secondary,
-                          ),
-                          child: const Text("Pick this"),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              )),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
+      backgroundColor: AppTheme.light,
+      body: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
             child: Container(
-              height: MediaQuery.of(context).size.height * 0.4,
+              padding: const EdgeInsets.symmetric(
+                  horizontal: PADDING, vertical: PADDING),
+              height: MediaQuery.of(context).size.width * 0.6,
               decoration: const BoxDecoration(
-                color: AppTheme.whiteColor,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(12),
+                color: AppTheme.gold,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(PADDING * 4),
+                  bottomRight: Radius.circular(PADDING * 4),
                 ),
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: PADDING * 1.2,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(
-                        // Capitalize,
-                        food.name.substring(0, 1).toUpperCase() +
-                            food.name.substring(1),
-                        style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: AppTheme.primary),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      buildDescription(food.description),
-                      TextButton(
-                        onPressed: () {
-                          setState(() {
-                            // toggle the bool variable true or false
-                            isReadmore = !isReadmore;
-                          });
-                        },
-                        child: Text(
-                          (isReadmore ? 'Read Less' : 'Read More'),
-                          style: const TextStyle(color: AppTheme.primary),
+                      IconButton(
+                        onPressed: (() {}),
+                        icon: const Icon(
+                          Icons.menu_rounded,
+                          size: 28,
+                          color: AppTheme.dark,
                         ),
                       ),
-                      const SizedBox(
-                        height: 8,
-                      ),
+                      IconButton(
+                        onPressed: (() {}),
+                        icon: const Icon(Icons.search,
+                            size: 28, color: AppTheme.dark),
+                      )
                     ],
                   ),
-                ),
+                  const SizedBox(
+                    height: PADDING * 2,
+                  ),
+                  Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: AppTheme.red,
+                          radius: PADDING * 3,
+                          child: Padding(
+                            padding: const EdgeInsets.all(PADDING / 4),
+                            child: Image.asset(
+                              "assets/images/avatar.png",
+                              fit: BoxFit.scaleDown,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: PADDING,
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            Text(
+                              "John Doe",
+                              style: AppFont.title,
+                            ),
+                            SizedBox(
+                              height: PADDING / 2,
+                            ),
+                            Text(
+                              "Architect",
+                              style: AppFont.normal,
+                            ),
+                          ],
+                        ),
+                        Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              InkWell(
+                                  onTap: (() {
+                                    // To open up to profile edit
+                                  }),
+                                  child: const CircleAvatar(
+                                    backgroundColor: AppTheme.red,
+                                    child: Icon(Icons.edit),
+                                  )),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
               ),
             ),
           ),
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: PADDING, vertical: PADDING),
+            sliver: SliverToBoxAdapter(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    "Menu Category",
+                    style: AppFont.subtitle,
+                  ),
+                  CircleAvatar(
+                    backgroundColor: AppTheme.green,
+                    child: IconButton(
+                      icon: const Icon(
+                        Icons.calendar_month_rounded,
+                      ),
+                      onPressed: (() {}),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+          SliverPadding(
+            padding: const EdgeInsets.all(PADDING),
+            sliver: SliverList(
+              delegate: SliverChildBuilderDelegate(
+                childCount: 3,
+                (context, index) {
+                  return CategoryTile(
+                    group: categories[index],
+                    color: colors[index],
+                  );
+                },
+              ),
+            ),
+          ),
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(horizontal: PADDING),
+            sliver: SliverToBoxAdapter(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: const [
+                  Text(
+                    "Current Collection",
+                    style: AppFont.subtitle,
+                  )
+                ],
+              ),
+            ),
+          ),
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(
+                horizontal: PADDING, vertical: PADDING),
+            sliver: SliverGrid(
+              delegate:
+                  SliverChildBuilderDelegate(childCount: 10, (context, index) {
+                return Container(
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      color: Colors.teal[100 * (index % 9)],
+                      borderRadius: BorderRadius.circular(PADDING)),
+                  child: Text('grid item $index'),
+                );
+              }),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: PADDING / 2,
+                  crossAxisSpacing: PADDING / 2),
+            ),
+          )
         ],
       ),
-      floatingActionButton: FloatingActionButton.small(
-        onPressed: () => {
-          setState(() {
-            _randomMenu();
-          })
-        },
-        backgroundColor: AppTheme.primary,
-        foregroundColor: AppTheme.whiteColor,
-        child: const Icon(CupertinoIcons.shuffle_thick),
-      ),
-    );
-  }
-
-  Widget buildDescription(String text) {
-    // if read more is false then show only 3 lines from text
-    // else show full text
-    final lines = isReadmore ? null : 8;
-    return Text(
-      text,
-      style: const TextStyle(
-        fontWeight: FontWeight.w500,
-        fontSize: 14,
-        color: AppTheme.secondary,
-      ),
-      maxLines: lines,
-      // overflow properties is used to show 3 dot in text widget
-      // so that user can understand there are few more line to read.
-      overflow: isReadmore ? TextOverflow.visible : TextOverflow.fade,
     );
   }
 }

@@ -1,14 +1,11 @@
 import 'package:flutter/painting.dart';
 
 class AppTheme {
-  // global colors
-  static const Color primary = Color.fromARGB(255, 3, 68, 133);
-  static const Color gradient = Color(0xffEBEBF8);
-  static const Color secondary = Color.fromARGB(255, 152, 152, 152);
-  static const Color whiteColor = Color(0xffffffff);
-  static const Color dark = Color(0xff000000);
-  static const Color danger = Color(0xffFF324B);
-
-  // Widget backgrounds
-  static const Color background = Color(0xffF3F5F7);
+  static const Color light = Color(0xFFFFF9EC);
+  static const Color gold = Color(0xFFF9BE7C);
+  static const Color red = Color(0xFFE46472);
+  static const Color blue = Color(0xFF6488E4);
+  static const Color green = Color(0xFF309397);
+  static const Color dark = Color(0xFF0D253F);
+  static const Color gray = Color.fromARGB(255, 56, 60, 65);
 }

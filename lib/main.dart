@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mest/presentation/auth/welcome.dart';
 import 'package:mest/presentation/history/history_info.dart';
-import 'package:mest/presentation/home/home.dart';
-import 'package:mest/presentation/intro/splash.dart';
+import 'package:mest/presentation/auth/splash.dart';
 import 'package:mest/presentation/menu/menu_plan.dart';
 import 'package:mest/routes/routes.dart';
 import 'package:mest/widgets/bottom_navigation.dart';
@@ -18,6 +18,12 @@ final GoRouter _router = GoRouter(
       path: AppRoute.splash,
       builder: (BuildContext context, GoRouterState state) {
         return const SplashScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoute.welcome,
+      builder: (BuildContext context, GoRouterState state) {
+        return const Welcome();
       },
     ),
     GoRoute(

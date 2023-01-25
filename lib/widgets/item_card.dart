@@ -12,7 +12,7 @@ class MenuCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        color: AppTheme.gradient,
+        color: AppTheme.gold,
         borderRadius: BorderRadius.all(
           Radius.circular(12),
         ),
@@ -25,7 +25,7 @@ class MenuCard extends StatelessWidget {
                 ? Image.memory(const Base64Decoder().convert(food.image))
                 : Container(
                     decoration: BoxDecoration(
-                        color: AppTheme.primary,
+                        color: AppTheme.gold,
                         borderRadius: BorderRadius.circular(12)),
                   ),
           ),
@@ -35,7 +35,7 @@ class MenuCard extends StatelessWidget {
             child: Text(
               food.name,
               style: const TextStyle(
-                  color: AppTheme.primary,
+                  color: AppTheme.gold,
                   fontSize: 20,
                   fontWeight: FontWeight.bold),
             ),
@@ -44,10 +44,10 @@ class MenuCard extends StatelessWidget {
               bottom: 10,
               right: 10,
               child: CircleAvatar(
-                backgroundColor: AppTheme.primary,
+                backgroundColor: AppTheme.gold,
                 child: Icon(
                   Icons.edit,
-                  color: AppTheme.whiteColor,
+                  color: AppTheme.light,
                 ),
               ))
         ],

@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
+
 class FoodCategory {
   final String name;
-  final String icon;
+  final Icon icon;
 
   FoodCategory({required this.name, required this.icon});
 }
