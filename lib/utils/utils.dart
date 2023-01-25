@@ -4,6 +4,8 @@ const String baseUrl = "assets/images/";
 // Dimensions
 const double PADDING = 16.0;
 
-
 // prefs
 const String BOARDED = "BOARDED";
+
+// Status
+enum LoadStatus { unknown,loading, success, failure }

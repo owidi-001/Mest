@@ -5,7 +5,7 @@ import 'package:mest/presentation/auth/welcome.dart';
 import 'package:mest/routes/routes.dart';
 import 'package:mest/theme/font.dart';
 import 'package:mest/theme/theme.dart';
-import 'package:mest/utils/constants.dart';
+import 'package:mest/utils/utils.dart';
 import 'package:mest/widgets/bottom_navigation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tbib_splash_screen/splash_screen_view.dart';

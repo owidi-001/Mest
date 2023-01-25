@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mest/presentation/auth/welcome.dart';
 import 'package:mest/presentation/history/history_info.dart';
@@ -8,7 +9,7 @@ import 'package:mest/routes/routes.dart';
 import 'package:mest/widgets/bottom_navigation.dart';
 
 void main() {
-  runApp(App());
+  runApp(ProviderScope(child: App()));
 }
 
 /// The route configuration.

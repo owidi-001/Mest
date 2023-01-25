@@ -5,6 +5,7 @@ import 'package:mest/presentation/history/history_info.dart';
 import 'package:mest/presentation/home/home.dart';
 import 'package:mest/presentation/menu/menu_plan.dart';
 import 'package:mest/theme/theme.dart';
+import 'package:mest/widgets/nav_drawer.dart';
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({super.key});
@@ -38,6 +39,25 @@ class _BottomNavigationState extends State<BottomNavigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const NavDrawer(),
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: AppTheme.gold,
+        foregroundColor: AppTheme.dark,
+        actions: [
+          IconButton(
+            onPressed: (() {}),
+            icon: const Icon(Icons.search, size: 28, color: AppTheme.dark),
+          )
+        ],
+      ),
+      backgroundColor: AppTheme.light,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: AppTheme.gray,
+        foregroundColor: AppTheme.light,
+        onPressed: (() {}),
+        child: const Icon(Icons.add),
+      ),
       body: body(),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: AppTheme.gold,

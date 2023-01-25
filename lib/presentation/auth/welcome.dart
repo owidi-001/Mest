@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mest/routes/routes.dart';
 import 'package:mest/theme/font.dart';
 import 'package:mest/theme/theme.dart';
-import 'package:mest/utils/constants.dart';
+import 'package:mest/utils/utils.dart';
 import 'package:mest/widgets/app_button.dart';
 
 class Welcome extends StatefulWidget {

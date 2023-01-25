@@ -1,4 +1,4 @@
-import 'package:mest/utils/constants.dart';
+import 'package:mest/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppPreferences {

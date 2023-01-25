@@ -6,8 +6,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masonry_view/flutter_masonry_view.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mest/database/helper.dart';
 import 'package:mest/models/food.model.dart';
+import 'package:mest/services/food.service.dart';
 import 'package:mest/theme/theme.dart';
 import 'package:mest/widgets/form_field.dart';
 
@@ -24,20 +24,9 @@ class _MenuScreenState extends State<MenuScreen> {
 
   bool _isLoading = true;
 
-  // This function is used to fetch all data from the database
-  void _refreshMenu() async {
-    final data = await SQLHelper.getMenu();
-
-    setState(() {
-      _menus = data;
-      _isLoading = false;
-    });
-  }
-
   @override
   void initState() {
     super.initState();
-    _refreshMenu(); // loads menu when app starts
   }
 
   // Form fields
@@ -236,9 +225,9 @@ class _MenuScreenState extends State<MenuScreen> {
         print(imageData);
       }
 
-      await SQLHelper.createItem(
+      await FoodService.createItem(
           _nameController.text, imageData, _descriptionController.text);
-      _refreshMenu();
+      // _refreshMenu();
 
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Menu added successfully!'),
@@ -252,139 +241,110 @@ class _MenuScreenState extends State<MenuScreen> {
 
   // Update an existing journal
   Future<void> _updateMenu(int id) async {
-    await SQLHelper.updateItem(
+    await FoodService.updateItem(
         id, _nameController.text, _descriptionController.text);
-    _refreshMenu();
+    // _refreshMenu();
   }
 
   // Delete an item
   void _deleteItem(int id) async {
-    await SQLHelper.deleteItem(id);
+    await FoodService.deleteItem(id);
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
       content: Text('Successfully deleted a menu!'),
     ));
-    _refreshMenu();
+    // _refreshMenu();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppTheme.gold,
-        // leading: ,
-        title: const Text("Menu"),
-        centerTitle: true,
-        actions: [
-          InkWell(
-              onTap: (() {
-                _showForm(null);
-              }),
-              child: const CircleAvatar(
-                  backgroundColor: AppTheme.gold,
-                  child: Icon(CupertinoIcons.add_circled_solid))),
-          const SizedBox(
-            width: 18,
-          )
-        ],
-      ),
+    return SingleChildScrollView(
+      child: _menus.isNotEmpty
+          ? MasonryView(
+              listOfItem: _menus,
+              numberOfColumn: 1,
+              itemBuilder: (item) {
+                // Create food instance from the item indexed
 
-      body: SingleChildScrollView(
-        child: _menus.isNotEmpty
-            ? MasonryView(
-                listOfItem: _menus,
-                numberOfColumn: 1,
-                itemBuilder: (item) {
-                  // Create food instance from the item indexed
+                Food food = Food.fromMap(item);
 
-                  Food food = Food.fromMap(item);
-
-                  return Container(
-                    decoration: const BoxDecoration(
-                      color: AppTheme.gold,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(12),
-                      ),
+                return Container(
+                  decoration: const BoxDecoration(
+                    color: AppTheme.gold,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(12),
                     ),
-                    child: InkWell(
-                      onTap: () {
-                        _showForm(food.id);
-                      },
-                      child: Stack(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(10.0),
-                            child: food.image.toString().isNotEmpty
-                                ? Image.memory(
-                                    const Base64Decoder().convert(food.image),
-                                  )
-                                : Container(
-                                    decoration: BoxDecoration(
-                                        color: AppTheme.gold,
-                                        borderRadius:
-                                            BorderRadius.circular(12)),
-                                  ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16.0, vertical: 10.0),
-                            child: Text(
-                              food.name,
-                              style: const TextStyle(
-                                  color: AppTheme.gold,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          Positioned(
-                            bottom: 10,
-                            right: 10,
-                            child: CircleAvatar(
-                              backgroundColor: AppTheme.red,
-                              child: InkWell(
-                                onTap: (() async {
-                                  await SQLHelper.deleteItem(food.id);
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(const SnackBar(
-                                    content: Text('Menu removed!'),
-                                  ));
-                                  _refreshMenu();
-                                }),
-                                child: const Icon(
-                                  Icons.delete,
-                                  color: AppTheme.light,
+                  ),
+                  child: InkWell(
+                    onTap: () {
+                      _showForm(food.id);
+                    },
+                    child: Stack(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(10.0),
+                          child: food.image.toString().isNotEmpty
+                              ? Image.memory(
+                                  const Base64Decoder().convert(food.image),
+                                )
+                              : Container(
+                                  decoration: BoxDecoration(
+                                      color: AppTheme.gold,
+                                      borderRadius: BorderRadius.circular(12)),
                                 ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16.0, vertical: 10.0),
+                          child: Text(
+                            food.name,
+                            style: const TextStyle(
+                                color: AppTheme.gold,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 10,
+                          right: 10,
+                          child: CircleAvatar(
+                            backgroundColor: AppTheme.red,
+                            child: InkWell(
+                              onTap: (() async {
+                                await FoodService.deleteItem(food.id);
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(const SnackBar(
+                                  content: Text('Menu removed!'),
+                                ));
+                                // _refreshMenu();
+                              }),
+                              child: const Icon(
+                                Icons.delete,
+                                color: AppTheme.light,
                               ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  );
-                },
-              )
-            : Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const SizedBox(
-                      height: 100,
-                    ),
-                    const Text("You don't have any item saved"),
-                    TextButton(
-                        onPressed: (() => _showForm(null)),
-                        child: const Text("Add menu"))
-                  ],
-                ),
+                  ),
+                );
+              },
+            )
+          : Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(
+                    height: 100,
+                  ),
+                  const Text("You don't have any item saved"),
+                  TextButton(
+                      onPressed: (() => _showForm(null)),
+                      child: const Text("Add menu"))
+                ],
               ),
-      ),
-
-      // floatingActionButton: FloatingActionButton.small(
-      //   onPressed: () => {},
-      //   backgroundColor: AppTheme.gold,
-      //   foregroundColor: AppTheme.light,
-      //   child: const Icon(CupertinoIcons.add_circled_solid),
-      // ),
+            ),
     );
   }
 }
