@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mest/theme/theme.dart';
 
 class NavDrawer extends StatelessWidget {
   const NavDrawer({super.key});
@@ -6,17 +7,15 @@ class NavDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(padding: EdgeInsets.zero, children: <Widget>[
+      backgroundColor: AppTheme.light,
+      child: Column(children: <Widget>[
         const DrawerHeader(
           decoration: BoxDecoration(
-              color: Colors.green,
+              color: AppTheme.red,
               image: DecorationImage(
                   fit: BoxFit.fill,
                   image: AssetImage('assets/illustrators/food.png'))),
-          child: Text(
-            'Mest Planner',
-            style: TextStyle(color: Colors.white, fontSize: 25),
-          ),
+          child: null,
         ),
         ListTile(
           leading: const Icon(Icons.verified_user),
@@ -33,11 +32,16 @@ class NavDrawer extends StatelessWidget {
           title: const Text('Feedback'),
           onTap: () => {Navigator.of(context).pop()},
         ),
-        ListTile(
-          leading: const Icon(Icons.exit_to_app),
-          title: const Text('Logout'),
-          onTap: () => {Navigator.of(context).pop()},
-        ),
+        Expanded(
+            child: Container(
+          alignment: Alignment.bottomLeft,
+          // color: AppTheme.blue,
+          child: ListTile(
+            leading: const Icon(Icons.exit_to_app),
+            title: const Text('Logout'),
+            onTap: () => {Navigator.of(context).pop()},
+          ),
+        )),
       ]),
     );
   }

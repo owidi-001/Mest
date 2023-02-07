@@ -7,7 +7,7 @@ import 'package:mest/theme/font.dart';
 import 'package:mest/theme/theme.dart';
 import 'package:mest/utils/utils.dart';
 import 'package:mest/widgets/category_tile.dart';
-import 'package:mest/widgets/food_card.dart';
+import 'package:mest/widgets/food_card_home.dart';
 import 'package:mest/widgets/nav_drawer.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {

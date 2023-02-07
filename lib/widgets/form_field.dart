@@ -4,27 +4,17 @@ import 'package:mest/theme/theme.dart';
 InputDecoration buildInputDecoration(String hintText, IconData icon) {
   return InputDecoration(
       prefixIcon: Icon(icon),
+      iconColor: AppTheme.gold,
       contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
       hintText: hintText,
+      label: Text(hintText),
+      labelStyle: const TextStyle(color: AppTheme.light),
       border: OutlineInputBorder(
+        borderSide: const BorderSide(color: AppTheme.light),
         borderRadius: BorderRadius.circular(10),
-      ));
-}
-
-Material appButton(String title, Function() function) {
-  return Material(
-    elevation: 5,
-    borderRadius: const BorderRadius.all(Radius.circular(10)),
-    color: AppTheme.gold,
-    child: MaterialButton(
-      onPressed: function,
-      padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-      minWidth: double.infinity,
-      child: Text(
-        title,
-        style: const TextStyle(
-            color: AppTheme.light, fontWeight: FontWeight.bold, fontSize: 18),
       ),
-    ),
-  );
+      focusedBorder:
+          OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+          fillColor: AppTheme.gold
+          );
 }

@@ -103,11 +103,16 @@ class _WelcomeState extends State<Welcome> {
                 const SizedBox(
                   height: PADDING * 5,
                 ),
-                AppButton(
+                Padding(
+                  padding: const EdgeInsets.all(PADDING),
+                  child: AppButton(
                     title: "Continue",
                     onTap: (() {
                       context.go(AppRoute.home);
-                    })),
+                    }),
+                    background: AppTheme.red,
+                  ),
+                ),
                 const SizedBox(
                   height: PADDING * 2,
                 ),

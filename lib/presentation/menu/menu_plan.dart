@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masonry_view/flutter_masonry_view.dart';
@@ -9,6 +8,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mest/models/food.model.dart';
 import 'package:mest/services/food.service.dart';
 import 'package:mest/theme/theme.dart';
+import 'package:mest/utils/utils.dart';
+import 'package:mest/widgets/app_button.dart';
+import 'package:mest/widgets/food_card_menu.dart';
 import 'package:mest/widgets/form_field.dart';
 
 class MenuScreen extends StatefulWidget {
@@ -20,7 +22,7 @@ class MenuScreen extends StatefulWidget {
 
 class _MenuScreenState extends State<MenuScreen> {
   // All menu
-  List<Map<String, dynamic>> _menus = [];
+  List<Food> _menus = List.generate(10, (index) => Food.empty());
 
   bool _isLoading = true;
 
@@ -42,13 +44,17 @@ class _MenuScreenState extends State<MenuScreen> {
     if (id != null) {
       // id == null -> create new item
       // id != null -> update an existing item
-      final existingMenu = _menus.firstWhere((element) => element['id'] == id);
-      _nameController.text = existingMenu['name'];
-      _descriptionController.text = existingMenu['description'];
+      final existingMenu = _menus.firstWhere((element) => element.id == id);
+      _nameController.text = existingMenu.name;
+      _descriptionController.text = existingMenu.description;
+    } else {
+      _nameController.text = "";
+      _descriptionController.text = "";
     }
 
     // show modalsheet
     showModalBottomSheet(
+      backgroundColor: AppTheme.gray,
       context: context,
       elevation: 5,
       isScrollControlled: true,
@@ -58,7 +64,7 @@ class _MenuScreenState extends State<MenuScreen> {
           left: 15,
           right: 15,
           // this will prevent the soft keyboard from covering the text fields
-          bottom: MediaQuery.of(context).viewInsets.bottom + 120,
+          bottom: MediaQuery.of(context).viewInsets.bottom + 200,
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -81,46 +87,28 @@ class _MenuScreenState extends State<MenuScreen> {
               height: 20,
             ),
             Container(
-              height: MediaQuery.of(context).size.height * 0.2,
+              // height: MediaQuery.of(context).size.height * 0.2,
               decoration: const BoxDecoration(
                   color: AppTheme.light,
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10))),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: const [
-                      Text(
-                        "Pick Image from",
-                        style: TextStyle(
-                            color: AppTheme.gold,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
-                      ),
-                    ],
+                  const SizedBox(
+                    height: PADDING,
                   ),
-                  Row(
-                    children: const [
-                      Icon(
-                        Icons.info,
-                        color: AppTheme.gold,
-                      ),
-                      SizedBox(
-                        width: 12,
-                      ),
-                      Text(
-                        'Take Square photos [1:1]',
-                        style: TextStyle(
-                            color: AppTheme.gray,
-                            fontWeight: FontWeight.normal,
-                            fontSize: 12),
-                      ),
-                    ],
+                  const Text(
+                    "Pick Image from",
+                    style: TextStyle(
+                        color: AppTheme.gray,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18),
+                  ),
+                  const SizedBox(
+                    height: PADDING,
                   ),
                   Row(
                     mainAxisSize: MainAxisSize.max,
@@ -138,7 +126,7 @@ class _MenuScreenState extends State<MenuScreen> {
                           setState(() {});
                         },
                         icon: const Icon(
-                          Icons.photo,
+                          Icons.camera_alt,
                           color: AppTheme.gold,
                         ),
                         label: const Text(
@@ -163,6 +151,24 @@ class _MenuScreenState extends State<MenuScreen> {
                       ),
                     ],
                   ),
+                  Row(
+                    children: const [
+                      Icon(
+                        Icons.info,
+                        color: AppTheme.gold,
+                      ),
+                      SizedBox(
+                        width: 12,
+                      ),
+                      Text(
+                        'Take Square photos [1:1]',
+                        style: TextStyle(
+                            color: AppTheme.gray,
+                            fontWeight: FontWeight.normal,
+                            fontSize: 12),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -171,39 +177,47 @@ class _MenuScreenState extends State<MenuScreen> {
               height: 20,
             ),
 
-            Material(
-              elevation: 5,
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
-              color: AppTheme.gold,
-              child: MaterialButton(
-                onPressed: () async {
-                  // Save new journal
-                  if (id == null) {
-                    await _addMenu();
-                  }
-
-                  if (id != null) {
-                    await _updateMenu(id);
-                  }
-
-                  // Clear the text fields
-                  _nameController.text = '';
-                  _descriptionController.text = '';
-
-                  // Close the bottom sheet
-                  Navigator.of(context).pop();
-                },
-                padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-                minWidth: double.infinity,
-                child: Text(
-                  id == null ? 'Create New' : 'Update',
-                  style: const TextStyle(
-                      color: AppTheme.light,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18),
-                ),
-              ),
-            )
+            id != null
+                ? Row(
+                    children: [
+                      Expanded(
+                        child: AppButton(
+                          title: "Update",
+                          onTap: (() async {
+                            await _updateMenu(id);
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content: Text('Item Updated!'),
+                            ));
+                          }),
+                          background: AppTheme.green,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: PADDING,
+                      ),
+                      Expanded(
+                        child: AppButton(
+                          title: "Delete",
+                          onTap: (() async {
+                            await FoodService.deleteItem(id);
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content: Text('Item removed!'),
+                            ));
+                          }),
+                          background: AppTheme.red,
+                        ),
+                      ),
+                    ],
+                  )
+                : AppButton(
+                    title: "Create new",
+                    onTap: (() async {
+                      await _addMenu();
+                    }),
+                    background: AppTheme.green,
+                  )
           ],
         ),
       ),
@@ -257,94 +271,50 @@ class _MenuScreenState extends State<MenuScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: _menus.isNotEmpty
-          ? MasonryView(
-              listOfItem: _menus,
-              numberOfColumn: 1,
-              itemBuilder: (item) {
-                // Create food instance from the item indexed
-
-                Food food = Food.fromMap(item);
-
-                return Container(
-                  decoration: const BoxDecoration(
-                    color: AppTheme.gold,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(12),
+    return Scaffold(
+      // backgroundColor: AppTheme.light,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: AppTheme.gray,
+        foregroundColor: AppTheme.light,
+        onPressed: (() => _showForm(null)),
+        child: const Icon(Icons.add),
+      ),
+      body: SingleChildScrollView(
+        child: _menus.isNotEmpty
+            ? Padding(
+                padding: const EdgeInsets.all(PADDING / 2),
+                child: MasonryView(
+                  listOfItem: _menus,
+                  numberOfColumn: 2,
+                  itemPadding: PADDING / 4,
+                  itemBuilder: (item) {
+                    return FoodCard(
+                        item: item,
+                        action: () {
+                          _showForm(item.id);
+                        });
+                  },
+                ),
+              )
+            : Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const SizedBox(
+                      height: 100,
                     ),
-                  ),
-                  child: InkWell(
-                    onTap: () {
-                      _showForm(food.id);
-                    },
-                    child: Stack(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(10.0),
-                          child: food.image.toString().isNotEmpty
-                              ? Image.memory(
-                                  const Base64Decoder().convert(food.image),
-                                )
-                              : Container(
-                                  decoration: BoxDecoration(
-                                      color: AppTheme.gold,
-                                      borderRadius: BorderRadius.circular(12)),
-                                ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 16.0, vertical: 10.0),
-                          child: Text(
-                            food.name,
-                            style: const TextStyle(
-                                color: AppTheme.gold,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 10,
-                          right: 10,
-                          child: CircleAvatar(
-                            backgroundColor: AppTheme.red,
-                            child: InkWell(
-                              onTap: (() async {
-                                await FoodService.deleteItem(food.id);
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(const SnackBar(
-                                  content: Text('Menu removed!'),
-                                ));
-                                // _refreshMenu();
-                              }),
-                              child: const Icon(
-                                Icons.delete,
-                                color: AppTheme.light,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            )
-          : Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const SizedBox(
-                    height: 100,
-                  ),
-                  const Text("You don't have any item saved"),
-                  TextButton(
-                      onPressed: (() => _showForm(null)),
-                      child: const Text("Add menu"))
-                ],
+                    const Text("You don't have any item saved"),
+                    TextButton(
+                        onPressed: (() => _showForm(null)),
+                        child: const Text(
+                          "Add menu",
+                          style: TextStyle(color: AppTheme.gold),
+                        ))
+                  ],
+                ),
               ),
-            ),
+      ),
     );
   }
 }

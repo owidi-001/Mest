@@ -52,12 +52,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
         ],
       ),
       backgroundColor: AppTheme.light,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: AppTheme.gray,
-        foregroundColor: AppTheme.light,
-        onPressed: (() {}),
-        child: const Icon(Icons.add),
-      ),
       body: body(),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: AppTheme.gold,
@@ -68,9 +62,9 @@ class _BottomNavigationState extends State<BottomNavigation> {
         onTap: _updateIndex,
         items: const [
           BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.circle_grid_hex), label: "home"),
+              icon: Icon(Icons.dashboard_rounded), label: "home"),
           BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.table_badge_more_fill), label: "menu"),
+              icon: Icon(Icons.restaurant_menu_rounded), label: "menu"),
           BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.time_solid), label: "history"),
         ],
