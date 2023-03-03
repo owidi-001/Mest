@@ -5,7 +5,7 @@ import 'package:sqflite/sqflite.dart' as sql;
 class FoodService {
   // Create new item
   static Future<int> createItem(
-      String? image, String? name, String? description) async {
+      String? name, String? image, String? description) async {
     final db = await SQLHelper.db();
 
     final data = {"name": name, "image": image, "description": description};

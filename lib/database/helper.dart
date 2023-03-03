@@ -6,11 +6,20 @@ class SQLHelper {
   static Future<void> createTables(sql.Database database) async {
     const String query = """ CREATE TABLE menu(
       id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-      name TEXT,
+      name VARCHAR(100),
       image TEXT,
-      description TEXT,
+      description VARCHAR(255),
       created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-    ) """;
+    ),
+    CREATE TABLE menu(
+      id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+      name VARCHAR(100),
+      image TEXT,
+      description VARCHAR(255),
+      created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    ),
+    
+     """;
     await database.execute(query);
   }
 

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:mest/models/food.model.dart';
 import 'package:mest/theme/font.dart';
@@ -32,13 +34,13 @@ class FoodCard extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(PADDING / 4),
                 child: item.image.toString().isNotEmpty
-                    // ? Image.memory(
-                    //     const Base64Decoder().convert(item.image),
-                    //   )
-                    ? Image.asset(
-                        item.image,
-                        fit: BoxFit.fitWidth,
+                    ? Image.memory(
+                        const Base64Decoder().convert(item.name),
                       )
+                    // ? Image.asset(
+                    //     item.image,
+                    //     fit: BoxFit.fitWidth,
+                    //   )
                     : Container(
                         height: 200,
                         decoration: BoxDecoration(
@@ -57,7 +59,7 @@ class FoodCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(PADDING / 2),
               child: Text(
-                item.name,
+                item.image,
                 style: AppFont.normal,
               ),
             )

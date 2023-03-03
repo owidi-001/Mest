@@ -29,97 +29,98 @@ class _WelcomeState extends State<Welcome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Positioned(
+      backgroundColor: Colors.transparent,
+      body: Container(
+        decoration: const BoxDecoration(color: AppTheme.dark),
+        child: Stack(
+          children: [
+            Positioned(
               top: 0,
               left: 0,
               right: 0,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const SizedBox(
                     height: PADDING * 4,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children: [
                       Text(
                         "Mest",
-                        style: AppFont.title,
+                        style: AppFont.title.copyWith(
+                            fontFamily: "monospace", color: AppTheme.light),
                       ),
                     ],
                   ),
                   const SizedBox(
                     height: PADDING * 4,
                   ),
-                ],
-              )),
-          Container(
-            padding: const EdgeInsets.symmetric(
-                vertical: PADDING * 4, horizontal: PADDING),
-            alignment: Alignment.topCenter,
-            decoration: const BoxDecoration(
-              color: AppTheme.gold,
-              // image: DecorationImage(
-              //     image: AssetImage("assets/illustrators/food.png"),
-              //     fit: BoxFit.fitWidth),
-            ),
-            child: Column(
-              children: const [
-                Text(
-                  "Mest",
-                  style: TextStyle(
-                      fontSize: PADDING * 2,
-                      fontWeight: FontWeight.bold,
-                      color: AppTheme.dark,
-                      fontFamily: "lato"),
-                ),
-                SizedBox(
-                  height: PADDING,
-                ),
-                Image(image: AssetImage("assets/illustrators/food.png")),
-              ],
-            ),
-          ),
-          Positioned(
-            bottom: PADDING,
-            left: 0,
-            right: 0,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  "Welcome.",
-                  style: AppFont.title,
-                ),
-                const SizedBox(
-                  height: PADDING,
-                ),
-                const Text(
-                  "Plan, pick and save your daily meal plans.",
-                  style: AppFont.normal,
-                ),
-                const SizedBox(
-                  height: PADDING * 5,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(PADDING),
-                  child: AppButton(
-                    title: "Continue",
-                    onTap: (() {
-                      context.go(AppRoute.home);
-                    }),
-                    background: AppTheme.red,
+                  Container(
+                    width: MediaQuery.of(context).size.width / 1.5,
+                    height: MediaQuery.of(context).size.height / 3,
+                    child: Image.asset("assets/illustrators/welcome.png"),
                   ),
-                ),
-                const SizedBox(
-                  height: PADDING * 2,
-                ),
-              ],
+                  const SizedBox(
+                    height: PADDING * 4,
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+            Container(
+              padding: const EdgeInsets.symmetric(
+                  vertical: PADDING * 4, horizontal: PADDING),
+              alignment: Alignment.topCenter,
+              decoration: const BoxDecoration(
+                color: Colors.black12,
+              ),
+            ),
+            Positioned(
+              bottom: PADDING,
+              left: 0,
+              right: 0,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Welcome.",
+                    style: AppFont.title.copyWith(color: AppTheme.light),
+                  ),
+                  const SizedBox(
+                    height: PADDING,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: PADDING),
+                    child: Text(
+                      // "Plan, pick and save your daily meal plans.",
+                      "Read books... cause it's something you should do. Why aren't you reading honestly?",
+                      style: AppFont.normal.copyWith(color: AppTheme.light),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: PADDING * 5,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(PADDING),
+                    child: AppButton(
+                      title: "Continue",
+                      onTap: (() {
+                        context.go(AppRoute.dashboard);
+                      }),
+                      background: Colors.blueGrey,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: PADDING * 2,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

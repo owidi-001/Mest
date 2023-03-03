@@ -4,7 +4,8 @@ class AppRoute {
   static const String onboard = "/onboard";
 
   // Home navs
-  static const String home = "/home";
-  static const String plan = "plan";
-  static const String history = "history";
+  static const String dashboard = "/dashboard";
+  // static const String home = "/home";
+  // static const String plan = "plan";
+  // static const String history = "history";
 }

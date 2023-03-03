@@ -19,21 +19,4 @@ class AppFont {
       fontSize: 16,
       fontWeight: FontWeight.normal,
       fontFamily: "poppins");
-
-  static const TextStyle whiteTitle = TextStyle(
-      color: Color(0xFFFFFFFF),
-      fontSize: 28,
-      fontWeight: FontWeight.bold,
-      fontFamily: "poppins");
-  static const TextStyle whiteSubtitle = TextStyle(
-      color: Color(0xFFFFFFFF),
-      fontSize: 18,
-      fontWeight: FontWeight.bold,
-      fontFamily: "poppins");
-
-  static const TextStyle whiteBody = TextStyle(
-      color: Color(0xFFFFFFFF),
-      fontSize: 14,
-      fontWeight: FontWeight.bold,
-      fontFamily: "poppins");
 }
