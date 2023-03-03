@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mest/presentation/dashboard/journal/widgets/logout_prompt.dart';
 import 'package:mest/theme/font.dart';
 import 'package:mest/utils/utils.dart';
 
@@ -8,8 +9,6 @@ class Journal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var profileImage = "jds";
-
     return CustomScrollView(
       slivers: [
         const SliverToBoxAdapter(
@@ -19,40 +18,6 @@ class Journal extends StatelessWidget {
           ),
         ),
         // Profile image
-        // SliverToBoxAdapter(
-        //   child: Container(
-        //     padding: const EdgeInsets.symmetric(vertical: PADDING),
-        //     decoration: BoxDecoration(
-        //       borderRadius: BorderRadius.circular(12),
-        //     ),
-        //     child: profileImage.isNotEmpty
-        //         ? Hero(
-        //             tag: "",
-        //             child: Container(
-        //               padding: const EdgeInsets.all(PADDING),
-        //               // decoration: const BoxDecoration(color: Colors.white54),
-        //               child: Stack(
-        //                 children: [
-        //                   Positioned(
-        //                       right: 0,
-        //                       top: 0,
-        //                       child: IconButton(
-        //                           onPressed: () {},
-        //                           icon: const Icon(Icons.edit))),
-        //                   CircleAvatar(
-        //                     radius: 32,
-        //                     child: Image.asset(
-        //                       "assets/images/avatar.png",
-        //                       fit: BoxFit.contain,
-        //                     ),
-        //                   ),
-        //                 ],
-        //               ),
-        //             ),
-        //           )
-        //         : const Placeholder(),
-        //   ),
-        // ),
         SliverToBoxAdapter(
           child: Container(
             alignment: Alignment.topLeft,
@@ -127,7 +92,7 @@ class Journal extends StatelessWidget {
                 ListTile(
                   contentPadding: const EdgeInsets.symmetric(vertical: PADDING),
                   title: Text(
-                    "Privacy policy",
+                    "Notifications",
                     style: AppFont.title.copyWith(fontSize: 16),
                   ),
                   trailing: IconButton(
@@ -159,7 +124,7 @@ class Journal extends StatelessWidget {
                 ListTile(
                   contentPadding: const EdgeInsets.symmetric(vertical: PADDING),
                   title: Text(
-                    "Log out",
+                    "Privacy policy",
                     style: AppFont.title.copyWith(fontSize: 16),
                   ),
                   trailing: IconButton(
@@ -169,6 +134,50 @@ class Journal extends StatelessWidget {
                         color: Colors.white54,
                       )),
                 ),
+                const Divider(
+                  height: 0,
+                ),
+                ListTile(
+                  contentPadding: const EdgeInsets.symmetric(vertical: PADDING),
+                  title: Text(
+                    "Location",
+                    style: AppFont.title.copyWith(fontSize: 16),
+                  ),
+                  trailing: IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        CupertinoIcons.arrow_right_circle_fill,
+                        color: Colors.white54,
+                      )),
+                ),
+                const Divider(
+                  height: 0,
+                ),
+                ListTile(
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) => const LogoutDialog());
+                  },
+                  contentPadding: const EdgeInsets.symmetric(vertical: PADDING),
+                  title: Text(
+                    "Log out",
+                    style: AppFont.title.copyWith(fontSize: 16),
+                  ),
+                  trailing: IconButton(
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) => const LogoutDialog());
+                      },
+                      icon: const Icon(
+                        CupertinoIcons.arrow_right_circle_fill,
+                        color: Colors.white54,
+                      )),
+                ),
+                const SizedBox(
+                  height: 50,
+                )
               ],
             ),
           ),

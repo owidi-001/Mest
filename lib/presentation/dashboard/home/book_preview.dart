@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:mest/presentation/dashboard/home/models/book_model.dart';
+import 'package:mest/presentation/dashboard/home/widgets/boot_info.dart';
+import 'package:mest/presentation/dashboard/widgets/drawer.dart';
 import 'package:mest/theme/theme.dart';
 import 'package:mest/utils/utils.dart';
 import 'package:mest/widgets/app_button.dart';
@@ -20,10 +22,12 @@ class DetailScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: Column(
+      body: Stack(
         children: <Widget>[
-          Expanded(
+          Positioned(
+            top: 0,
             child: Container(
+              height: size.height / 2.15,
               padding: const EdgeInsets.symmetric(vertical: PADDING),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
@@ -39,119 +43,17 @@ class DetailScreen extends StatelessWidget {
                   : const Placeholder(),
             ),
           ),
-          Expanded(
-            child: Container(
-              alignment: Alignment.bottomCenter,
-              padding: EdgeInsets.only(
-                top: size.height * 0.05,
-                left: PADDING,
-                right: PADDING,
-              ),
-              decoration: const BoxDecoration(
-                color: Colors.white54,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(24),
-                  topRight: Radius.circular(24),
+          DraggableScrollableSheet(
+            initialChildSize: 0.5,
+            minChildSize: .5,
+            builder: (BuildContext context, ScrollController scrollController) {
+              return SingleChildScrollView(
+                controller: scrollController,
+                child: SnippetViewContent(
+                  product: product,
                 ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          product.title!,
-                          style: const TextStyle(
-                              color: AppTheme.dark,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 24),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                        height: 1,
-                        width: 40,
-                        decoration: BoxDecoration(
-                            color: AppTheme.dark,
-                            borderRadius: BorderRadius.circular(12)),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 28,
-                  ),
-
-                  // Product description
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          RichText(
-                            text: TextSpan(
-                              style: const TextStyle(color: AppTheme.dark),
-                              children: [
-                                const TextSpan(text: "Book Author\n"),
-                                TextSpan(
-                                  text: "${product.author}",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineSmall!
-                                      .copyWith(fontWeight: FontWeight.bold),
-                                )
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 16.0,
-                          ),
-                          RichText(
-                            text: TextSpan(
-                              style: const TextStyle(color: AppTheme.dark),
-                              children: [
-                                const TextSpan(
-                                    text: "Numer of pages Quantity\n"),
-                                TextSpan(
-                                  text: "400",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineSmall!
-                                      .copyWith(fontWeight: FontWeight.bold),
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  // Inform user on the action to take
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 16.0),
-                    child: Text(
-                      "You can adjust the quantity by the \t '+' \t or \t '-' \t buttons then proceed to add to cart.",
-                      style: TextStyle(height: 1.5),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-
-                  AppButton(title: "Buy", onTap: () {})
-                ],
-              ),
-            ),
+              );
+            },
           ),
         ],
       ),

@@ -5,6 +5,7 @@ import 'package:mest/presentation/auth/welcome.dart';
 import 'package:mest/presentation/auth/splash.dart';
 import 'package:mest/presentation/dashboard/base.dart';
 import 'package:mest/routes/routes.dart';
+import 'package:mest/theme/theme.dart';
 
 void main() {
   runApp(ProviderScope(child: App()));
@@ -30,26 +31,6 @@ final GoRouter _router = GoRouter(
       builder: (BuildContext context, GoRouterState state) {
         return const Dashboard();
       },
-      // routes: <RouteBase>[
-      //   GoRoute(
-      //     path: AppRoute.home,
-      //     builder: (BuildContext context, GoRouterState state) {
-      //       return const HomeScreen();
-      //     },
-      //   ),
-      //   GoRoute(
-      //     path: AppRoute.plan,
-      //     builder: (BuildContext context, GoRouterState state) {
-      //       return const MenuScreen();
-      //     },
-      //   ),
-      //   GoRoute(
-      //     path: AppRoute.history,
-      //     builder: (BuildContext context, GoRouterState state) {
-      //       return const HistoryScreen();
-      //     },
-      //   ),
-      // ],
     ),
   ],
 );

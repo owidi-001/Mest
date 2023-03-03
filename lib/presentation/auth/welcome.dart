@@ -95,7 +95,7 @@ class _WelcomeState extends State<Welcome> {
                     padding: const EdgeInsets.symmetric(horizontal: PADDING),
                     child: Text(
                       // "Plan, pick and save your daily meal plans.",
-                      "Read books... cause it's something you should do. Why aren't you reading honestly?",
+                      "We read because we can...",
                       style: AppFont.normal.copyWith(color: AppTheme.light),
                       textAlign: TextAlign.center,
                     ),

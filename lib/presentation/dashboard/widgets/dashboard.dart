@@ -9,6 +9,7 @@ import 'package:mest/presentation/dashboard/journal/journal.dart';
 import 'package:mest/presentation/dashboard/home/home.dart';
 import 'package:mest/presentation/dashboard/reads/reads.dart';
 import 'package:mest/provider/dashboard_provider.dart';
+import 'package:mest/theme/font.dart';
 import 'package:mest/theme/theme.dart';
 
 class BaseScaffold extends ConsumerStatefulWidget {
@@ -35,17 +36,12 @@ class _BaseScaffoldState extends ConsumerState<BaseScaffold>
 
   List<TabItem> tabItems = List.of([
     TabItem(CupertinoIcons.bag_fill, "Shop", AppTheme.dark,
-        labelStyle: const TextStyle(
-            color: AppTheme.dark, fontWeight: FontWeight.w400, fontSize: 12)),
+        labelStyle: AppFont.normal),
     TabItem(CupertinoIcons.news_solid, "Reads", AppTheme.dark,
-        labelStyle: const TextStyle(
-            color: AppTheme.dark, fontWeight: FontWeight.w400, fontSize: 12)),
+        labelStyle: AppFont.normal),
     TabItem(CupertinoIcons.cart_fill, "Cart", AppTheme.dark,
-        labelStyle: const TextStyle(
-            color: AppTheme.dark, fontWeight: FontWeight.w400, fontSize: 12)),
-    TabItem(Icons.person, "Profile", AppTheme.dark,
-        labelStyle: const TextStyle(
-            color: AppTheme.dark, fontWeight: FontWeight.w400, fontSize: 12)),
+        labelStyle: AppFont.normal),
+    TabItem(Icons.person, "Profile", AppTheme.dark, labelStyle: AppFont.normal),
   ]);
 
   Widget bottomNav() {
@@ -58,7 +54,7 @@ class _BaseScaffoldState extends ConsumerState<BaseScaffold>
         barHeight: 50,
         circleSize: 50,
         iconsSize: 24,
-        barBackgroundColor: AppTheme.green,
+        barBackgroundColor: Colors.blueGrey,
         animationDuration: const Duration(milliseconds: 300),
         selectedCallback: (selectedPos) => {
               ref
