@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mest/presentation/dashboard/home/models/book_model.dart';
 import 'package:mest/presentation/dashboard/home/provider/home_provider.dart';
+import 'package:mest/presentation/dashboard/home/utils/shimmer_utils.dart';
 import 'package:mest/presentation/dashboard/home/widgets/book_card_home.dart';
+import 'package:mest/presentation/dashboard/home/widgets/book_card_home_skeleton.dart';
 import 'package:mest/presentation/dashboard/home/widgets/category_btn.dart';
 import 'package:mest/theme/font.dart';
 import 'package:mest/theme/theme.dart';
@@ -93,6 +95,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             ),
           ),
         ),
+        const SliverPadding(
+          padding: EdgeInsets.all(8.0),
+          sliver: SliverToBoxAdapter(
+            child: ShimmerWidget(child: BookCardSkeleton()),
+          ),
+        ),
         SliverPadding(
           padding: const EdgeInsets.symmetric(horizontal: PADDING),
           sliver: SliverList(
@@ -101,6 +109,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       book: Book.dummy.first,
                     ),
                 childCount: Book.dummy.length * 2),
+          ),
+        ),
+        const SliverToBoxAdapter(
+          child: SizedBox(
+            height: PADDING * 5,
           ),
         )
       ],
