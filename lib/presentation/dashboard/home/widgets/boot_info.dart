@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:mest/presentation/dashboard/home/models/book_model.dart';
 import 'package:mest/presentation/dashboard/home/widgets/book_snippet.dart';
 import 'package:mest/presentation/dashboard/widgets/drawer.dart';
-import 'package:mest/theme/font.dart';
-import 'package:mest/theme/theme.dart';
-import 'package:mest/utils/utils.dart';
-import 'package:mest/widgets/app_button.dart';
+import 'package:mest/common/theme/font.dart';
+import 'package:mest/common/theme/theme.dart';
+import 'package:mest/common/utils/utils.dart';
+import 'package:mest/common/widgets/app_button.dart';
 
 class SnippetViewContent extends StatelessWidget {
   final Book product;
@@ -35,10 +35,8 @@ class SnippetViewContent extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
-                child: Text(
-                  product.title!,
-                  style: AppFont.title.copyWith(fontSize: 24)
-                ),
+                child: Text(product.title!,
+                    style: AppFont.title.copyWith(fontSize: 24)),
               ),
             ],
           ),

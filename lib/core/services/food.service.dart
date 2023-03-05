@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mest/database/helper.dart';
+import 'package:mest/core/database/helper.dart';
 import 'package:sqflite/sqflite.dart' as sql;
 
 class FoodService {

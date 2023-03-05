@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mest/theme/theme.dart';
+import 'package:mest/common/theme/theme.dart';
 
 class SnippetCard extends StatefulWidget {
   final String snippet;

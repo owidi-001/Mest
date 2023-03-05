@@ -6,9 +6,9 @@ import 'package:mest/presentation/dashboard/home/utils/shimmer_utils.dart';
 import 'package:mest/presentation/dashboard/home/widgets/book_card_home.dart';
 import 'package:mest/presentation/dashboard/home/widgets/book_card_home_skeleton.dart';
 import 'package:mest/presentation/dashboard/home/widgets/category_btn.dart';
-import 'package:mest/theme/font.dart';
-import 'package:mest/theme/theme.dart';
-import 'package:mest/utils/utils.dart';
+import 'package:mest/common/theme/font.dart';
+import 'package:mest/common/theme/theme.dart';
+import 'package:mest/common/utils/utils.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});

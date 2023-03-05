@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mest/theme/theme.dart';
+import 'package:mest/common/theme/theme.dart';
 
 class AppButton extends StatelessWidget {
   final String title;

@@ -1,4 +1,4 @@
-import 'package:mest/utils/utils.dart';
+import 'package:mest/common/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppPreferences {
@@ -10,4 +10,7 @@ class AppPreferences {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getBool(BOARDED) ?? false;
   }
+
+  // 
 }
+

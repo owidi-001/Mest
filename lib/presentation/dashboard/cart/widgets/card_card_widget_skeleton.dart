@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mest/theme/theme.dart';
-import 'package:mest/utils/utils.dart';
+import 'package:mest/common/theme/theme.dart';
+import 'package:mest/common/utils/utils.dart';
 
 class CartItemWidgetSkeleton extends ConsumerWidget {
   const CartItemWidgetSkeleton({Key? key}) : super(key: key);

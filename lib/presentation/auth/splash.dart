@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mest/core/provider/boarded_provider.dart';
 import 'package:mest/routes/routes.dart';
-import 'package:mest/theme/font.dart';
-import 'package:mest/theme/theme.dart';
+import 'package:mest/common/theme/font.dart';
+import 'package:mest/common/theme/theme.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  ConsumerState<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
-  bool onBoarded = false;
-
+class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   void initState() {
     super.initState();
@@ -22,8 +22,16 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _initialize() async {
     // Check if on boarded in shared prefs
+    bool onBoarded = ref.watch(boardedProvider);
+    bool onLoggedIn = ref.watch(boardedProvider);
+
     if (onBoarded) {
-      context.go(AppRoute.login);
+      // Check if logged in
+      if (onLoggedIn) {
+        context.go(AppRoute.dashboard);
+      } else {
+        context.go(AppRoute.login);
+      }
     } else {
       context.go(AppRoute.welcome);
     }

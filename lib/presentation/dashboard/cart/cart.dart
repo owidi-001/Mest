@@ -5,10 +5,10 @@ import 'package:mest/presentation/dashboard/cart/widgets/card_card_widget_skelet
 import 'package:mest/presentation/dashboard/cart/widgets/cart_card_widget.dart';
 import 'package:mest/presentation/dashboard/home/models/book_model.dart';
 import 'package:mest/presentation/dashboard/home/utils/shimmer_utils.dart';
-import 'package:mest/theme/font.dart';
-import 'package:mest/theme/theme.dart';
-import 'package:mest/utils/utils.dart';
-import 'package:mest/widgets/app_button.dart';
+import 'package:mest/common/theme/font.dart';
+import 'package:mest/common/theme/theme.dart';
+import 'package:mest/common/utils/utils.dart';
+import 'package:mest/common/widgets/app_button.dart';
 
 class CartScreen extends ConsumerStatefulWidget {
   const CartScreen({super.key});

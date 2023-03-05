@@ -1,5 +1,5 @@
 import 'package:flutter/painting.dart';
-import 'package:mest/theme/theme.dart';
+import 'package:mest/common/theme/theme.dart';
 
 class AppFont {
   static const TextStyle title = TextStyle(

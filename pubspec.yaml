@@ -50,6 +50,7 @@ dependencies:
   matrix4_transform: ^2.0.1
   circular_bottom_navigation: ^2.3.0
   syncfusion_flutter_charts: ^20.4.51
+  freezed_annotation:
 
 flutter_icons:
   android: "launcher_icon"
@@ -60,6 +61,9 @@ flutter_icons:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  build_runner: ^2.3.3
+  freezed: ^2.3.2
+  json_serializable: ^6.6.1
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

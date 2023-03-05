@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mest/presentation/dashboard/cart/models/cart_item_model.dart';
-import 'package:mest/theme/font.dart';
-import 'package:mest/theme/theme.dart';
+import 'package:mest/common/theme/font.dart';
+import 'package:mest/common/theme/theme.dart';
 
 class CartItemWidget extends ConsumerWidget {
   final CartItemModel item;

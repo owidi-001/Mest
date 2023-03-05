@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mest/theme/theme.dart';
-import 'package:mest/utils/utils.dart';
+import 'package:mest/common/theme/theme.dart';
+import 'package:mest/common/utils/utils.dart';
 
 class CategoryButton extends StatelessWidget {
   final String text;

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mest/routes/routes.dart';
-import 'package:mest/theme/font.dart';
+import 'package:mest/common/theme/font.dart';
 
 class LogoutDialog extends StatelessWidget {
   const LogoutDialog({super.key});

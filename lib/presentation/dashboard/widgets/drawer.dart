@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mest/presentation/dashboard/journal/widgets/logout_prompt.dart';
-import 'package:mest/provider/dashboard_provider.dart';
-import 'package:mest/theme/font.dart';
-import 'package:mest/theme/theme.dart';
-import 'package:mest/utils/utils.dart';
+import 'package:mest/core/provider/dashboard_provider.dart';
+import 'package:mest/common/theme/font.dart';
+import 'package:mest/common/theme/theme.dart';
+import 'package:mest/common/utils/utils.dart';
 
 class DrawerWidget extends ConsumerStatefulWidget {
   const DrawerWidget({super.key});

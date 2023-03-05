@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mest/presentation/dashboard/home/book_preview.dart';
 import 'package:mest/presentation/dashboard/home/models/book_model.dart';
-import 'package:mest/theme/font.dart';
-import 'package:mest/theme/theme.dart';
-import 'package:mest/utils/utils.dart';
+import 'package:mest/common/theme/font.dart';
+import 'package:mest/common/theme/theme.dart';
+import 'package:mest/common/utils/utils.dart';
 
 class BookCard extends StatefulWidget {
   final Book book;
