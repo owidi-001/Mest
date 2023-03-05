@@ -29,7 +29,7 @@ class _WelcomeState extends State<Welcome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.blue[200],
       body: Container(
         decoration: const BoxDecoration(color: AppTheme.dark),
         child: Stack(
@@ -108,7 +108,7 @@ class _WelcomeState extends State<Welcome> {
                     child: AppButton(
                       title: "Continue",
                       onTap: (() {
-                        context.go(AppRoute.dashboard);
+                        context.go(AppRoute.register);
                       }),
                       background: Colors.blueGrey,
                     ),

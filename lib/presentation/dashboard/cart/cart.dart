@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mest/presentation/dashboard/cart/models/cart_item_model.dart';
-import 'package:mest/presentation/dashboard/cart/provider/cart_provider.dart';
 import 'package:mest/presentation/dashboard/cart/widgets/card_card_widget_skeleton.dart';
 import 'package:mest/presentation/dashboard/cart/widgets/cart_card_widget.dart';
 import 'package:mest/presentation/dashboard/home/models/book_model.dart';
@@ -54,7 +53,7 @@ class _CartScreenState extends ConsumerState<CartScreen> {
           // spacer
           const SliverPadding(padding: EdgeInsets.all(8.0)),
           const SliverPadding(
-            padding: EdgeInsets.symmetric(horizontal:PADDING),
+            padding: EdgeInsets.symmetric(horizontal: PADDING),
             sliver: SliverToBoxAdapter(
               child: ShimmerWidget(child: CartItemWidgetSkeleton()),
             ),

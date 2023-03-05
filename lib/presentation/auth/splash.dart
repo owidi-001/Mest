@@ -12,7 +12,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  bool isLoaded = false;
+  bool onBoarded = false;
 
   @override
   void initState() {
@@ -21,7 +21,12 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> _initialize() async {
-    context.go(AppRoute.welcome);
+    // Check if on boarded in shared prefs
+    if (onBoarded) {
+      context.go(AppRoute.login);
+    } else {
+      context.go(AppRoute.welcome);
+    }
   }
 
   @override

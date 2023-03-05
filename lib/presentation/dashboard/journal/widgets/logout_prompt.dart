@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mest/routes/routes.dart';
 import 'package:mest/theme/font.dart';
 
 class LogoutDialog extends StatelessWidget {
@@ -23,7 +25,8 @@ class LogoutDialog extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {
-            SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+            // SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+            context.go(AppRoute.login);
           },
           child: Text(
             'Yes',

@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:mest/theme/theme.dart';
 
-InputDecoration buildInputDecoration(String hintText, IconData icon) {
+InputDecoration buildInputDecoration(
+  String labelText,
+  String hintText,
+) {
   return InputDecoration(
-      prefixIcon: Icon(icon),
-      iconColor: AppTheme.gold,
-      contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-      hintText: hintText,
-      label: Text(hintText),
-      labelStyle: const TextStyle(color: AppTheme.light),
-      border: OutlineInputBorder(
-        borderSide: const BorderSide(color: AppTheme.light),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      focusedBorder:
-          OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
-          fillColor: AppTheme.gold
-          );
+    contentPadding: const EdgeInsets.fromLTRB(0, 15, 20, 15),
+    // hintText: hintText,
+    // hintStyle: const TextStyle(color: Colors.white70),
+    label: Text(labelText),
+    labelStyle: const TextStyle(color: Colors.blueGrey),
+    border: const UnderlineInputBorder(
+      borderSide: BorderSide(color: Colors.blueGrey),
+    ),
+    enabledBorder: const UnderlineInputBorder(
+      borderSide: BorderSide(color: Colors.blueGrey),
+    ),
+    focusedBorder: const UnderlineInputBorder(
+      borderSide: BorderSide(color: Colors.white70),
+    ),
+  );
 }

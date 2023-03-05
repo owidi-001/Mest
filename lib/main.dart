@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mest/presentation/auth/login.dart';
+import 'package:mest/presentation/auth/register.dart';
 import 'package:mest/presentation/auth/welcome.dart';
 import 'package:mest/presentation/auth/splash.dart';
 import 'package:mest/presentation/dashboard/base.dart';
 import 'package:mest/routes/routes.dart';
-import 'package:mest/theme/theme.dart';
 
 void main() {
   runApp(ProviderScope(child: App()));
@@ -24,6 +25,18 @@ final GoRouter _router = GoRouter(
       path: AppRoute.welcome,
       builder: (BuildContext context, GoRouterState state) {
         return const Welcome();
+      },
+    ),
+    GoRoute(
+      path: AppRoute.login,
+      builder: (BuildContext context, GoRouterState state) {
+        return const Login();
+      },
+    ),
+    GoRoute(
+      path: AppRoute.register,
+      builder: (BuildContext context, GoRouterState state) {
+        return const Register();
       },
     ),
     GoRoute(
