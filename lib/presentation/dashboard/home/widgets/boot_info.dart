@@ -37,10 +37,7 @@ class SnippetViewContent extends StatelessWidget {
               Expanded(
                 child: Text(
                   product.title!,
-                  style: const TextStyle(
-                      color: AppTheme.dark,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24),
+                  style: AppFont.title.copyWith(fontSize: 24)
                 ),
               ),
             ],
@@ -60,82 +57,97 @@ class SnippetViewContent extends StatelessWidget {
           const SizedBox(
             height: 28,
           ),
-          // Product description
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  RichText(
-                    text: TextSpan(
-                      style: const TextStyle(color: AppTheme.dark),
-                      children: [
-                        const TextSpan(text: "Author\n"),
-                        TextSpan(
-                          text: "${product.author}",
-                          style: AppFont.subtitle,
-                        )
-                      ],
-                    ),
+
+          Container(
+            padding: const EdgeInsets.all(PADDING),
+            decoration: BoxDecoration(
+                color: Colors.black54,
+                borderRadius: BorderRadiusDirectional.circular(PADDING / 2)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Expanded(
+                  flex: 1, // you can play with this value, by default it is 1
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.star_rounded,
+                        color: AppTheme.gold,
+                      ),
+                      Text.rich(TextSpan(
+                          text: " 4.5",
+                          style: AppFont.normal.copyWith(color: AppTheme.light),
+                          children: [
+                            TextSpan(
+                                text: "/5",
+                                style: AppFont.normal.copyWith(
+                                    color: Colors.white54, fontSize: 12))
+                          ]))
+                    ],
                   ),
-                  const SizedBox(
-                    height: 16.0,
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.menu_book_outlined,
+                        color: AppTheme.light,
+                      ),
+                      Text.rich(TextSpan(
+                          text: " ",
+                          style: AppFont.normal.copyWith(color: AppTheme.light),
+                          children: [
+                            TextSpan(
+                                text: "reads",
+                                style: AppFont.normal
+                                    .copyWith(color: Colors.white54))
+                          ]))
+                    ],
                   ),
-                  RichText(
-                    text: const TextSpan(
-                      style: TextStyle(color: AppTheme.dark),
-                      children: [
-                        TextSpan(text: "Year Published\n"),
-                        TextSpan(text: "- 2019", style: AppFont.subtitle)
-                      ],
-                    ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.last_page_sharp,
+                        color: AppTheme.light,
+                      ),
+                      Text.rich(TextSpan(
+                          text: " ",
+                          style: AppFont.normal.copyWith(color: AppTheme.dark),
+                          children: [
+                            TextSpan(
+                                text: "pages",
+                                style: AppFont.normal
+                                    .copyWith(color: Colors.white54))
+                          ]))
+                    ],
                   ),
-                  const SizedBox(
-                    height: 16.0,
-                  ),
-                  RichText(
-                    text: const TextSpan(
-                      style: TextStyle(color: AppTheme.dark),
-                      children: [
-                        TextSpan(text: "Pages\n"),
-                        TextSpan(text: "- 400", style: AppFont.subtitle)
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 16.0,
-                  ),
-                  RichText(
-                    text: const TextSpan(
-                      style: TextStyle(color: AppTheme.dark),
-                      children: [
-                        TextSpan(text: "Time to read\n"),
-                        TextSpan(text: "- 40 mins", style: AppFont.subtitle)
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 16.0,
-                  ),
-                  RichText(
-                    text: const TextSpan(
-                      style: TextStyle(color: AppTheme.dark),
-                      children: [
-                        TextSpan(text: "ISBN\n"),
-                        TextSpan(
-                            text: "- 4007492048120482", style: AppFont.subtitle)
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ],
+                ),
+              ],
+            ),
           ),
           const SizedBox(
-            height: 16,
+            height: PADDING,
           ),
+          RichText(
+            text: TextSpan(
+              style: const TextStyle(color: AppTheme.dark),
+              children: [
+                const TextSpan(text: "Author\n"),
+                TextSpan(
+                  text: "${product.author}",
+                  style: AppFont.subtitle,
+                )
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 16.0,
+          ),
+          // Product description
           // Give a snippet
           const Padding(
               padding: EdgeInsets.symmetric(vertical: 16.0),

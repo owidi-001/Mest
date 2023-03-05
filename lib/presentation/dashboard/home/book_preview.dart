@@ -1,12 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:mest/presentation/dashboard/home/models/book_model.dart';
 import 'package:mest/presentation/dashboard/home/widgets/boot_info.dart';
-import 'package:mest/presentation/dashboard/widgets/drawer.dart';
-import 'package:mest/theme/theme.dart';
 import 'package:mest/utils/utils.dart';
-import 'package:mest/widgets/app_button.dart';
 
 class DetailScreen extends StatelessWidget {
   final Book product;
