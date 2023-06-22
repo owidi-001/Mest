@@ -12,4 +12,6 @@ const String USER = "USER";
 const String TOKEN = "TOKEN";
 
 // Status
-enum LoadStatus { unknown, loading, success, failure }
+enum LoadStatus { initial, loading, success, failure }
+
+// 

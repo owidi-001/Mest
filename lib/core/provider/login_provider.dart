@@ -12,11 +12,11 @@ class LoginProvider extends StateNotifier<bool> {
   // Logs in and out
   void toggle() {
     if (kDebugMode) {
-      print("Togling :$state");
+      print("Togling login:$state");
     }
     state = !state;
     if (kDebugMode) {
-      print("Toggled :$state");
+      print("Toggled login:$state");
     }
   }
 }

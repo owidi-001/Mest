@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mest/core/provider/boarded_provider.dart';
+import 'package:mest/core/prefs/app_prefs.dart';
+import 'package:mest/core/prefs/user_prefs.dart';
+import 'package:mest/core/provider/auth_provider.dart';
+import 'package:mest/models/user/user_model.dart';
 import 'package:mest/routes/routes.dart';
 import 'package:mest/common/theme/font.dart';
 import 'package:mest/common/theme/theme.dart';
@@ -21,20 +24,25 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   }
 
   Future<void> _initialize() async {
-    // Check if on boarded in shared prefs
-    bool onBoarded = ref.watch(boardedProvider);
-    bool onLoggedIn = ref.watch(boardedProvider);
-
-    if (onBoarded) {
-      // Check if logged in
-      if (onLoggedIn) {
-        context.go(AppRoute.dashboard);
+    AppPreferences().boarded().then((value) {
+      if (value) {
+        // Check if logged in
+        UserPreferences().loadUserData().then((value) {
+          if (value != null) {
+            User user = value.user;
+            // save user and redirect to dashboard
+            ref.read(authProvider.notifier).loginUser(user: user);
+            // go to dashboard
+            context.go(AppRoute.dashboard);
+          } else {
+            // Redirect to login
+            context.go(AppRoute.login);
+          }
+        });
       } else {
-        context.go(AppRoute.login);
+        context.go(AppRoute.welcome);
       }
-    } else {
-      context.go(AppRoute.welcome);
-    }
+    });
   }
 
   @override

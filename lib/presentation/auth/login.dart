@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mest/core/services/auth/login_service.dart';
 import 'package:mest/routes/routes.dart';
 import 'package:mest/common/theme/font.dart';
 import 'package:mest/common/theme/theme.dart';
@@ -18,6 +19,25 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passWordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passWordController.dispose();
+    super.dispose();
+  }
+
+  _loginUser() async {
+    // Call user login service
+    LoginRequest request = LoginRequest(
+        email: _emailController.text.trim(),
+        password: _passWordController.text);
+    LoginService().login(request).then((value) {
+      // Do something
+    }).onError((error, stackTrace) {
+      // Do something
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

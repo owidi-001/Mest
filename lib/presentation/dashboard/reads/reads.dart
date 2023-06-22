@@ -18,6 +18,7 @@ class _ReadsState extends State<Reads> {
 
   @override
   Widget build(BuildContext context) {
+
     final List<ChartData> chartData = [
       ChartData('The quick brown fox', 20, AppTheme.gold),
       ChartData('The titanic', 80, AppTheme.green),

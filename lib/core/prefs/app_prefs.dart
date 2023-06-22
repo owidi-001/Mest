@@ -11,6 +11,9 @@ class AppPreferences {
     return prefs.getBool(BOARDED) ?? false;
   }
 
-  // 
+  // board
+  Future<void> board() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setBool(BOARDED, true);
+  }
 }
-

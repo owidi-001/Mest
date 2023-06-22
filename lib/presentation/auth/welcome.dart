@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mest/core/prefs/app_prefs.dart';
 import 'package:mest/routes/routes.dart';
 import 'package:mest/common/theme/font.dart';
 import 'package:mest/common/theme/theme.dart';
@@ -108,7 +109,10 @@ class _WelcomeState extends State<Welcome> {
                     child: AppButton(
                       title: "Continue",
                       onTap: (() {
-                        context.go(AppRoute.register);
+                        // confirm onboarded
+                        AppPreferences()
+                            .board()
+                            .then((value) => {context.go(AppRoute.register)});
                       }),
                       background: Colors.blueGrey,
                     ),
