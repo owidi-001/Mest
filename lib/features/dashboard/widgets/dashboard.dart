@@ -41,30 +41,60 @@ class _BaseScaffoldState extends ConsumerState<BaseScaffold>
   ]);
 
   Widget bottomNavigation() {
+    final int currentPosition = ref.watch(dashBoardNotifierProvider);
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: tabItems.asMap().entries.map((entry) {
-        final index = entry.key;
-        final tabItem = entry.value;
+        final int index = entry.key;
+        final TabItem tabItem = entry.value;
+        final bool isSelected = currentPosition == index;
+
         return GestureDetector(
           onTap: () {
             ref.read(dashBoardNotifierProvider.notifier).setPosition(index);
           },
-          child: Icon(
-            tabItem.icon,
-            color: ref.watch(dashBoardNotifierProvider) == index
-                ? AppTheme.light
-                : Colors.white.withOpacity(.5),
-            size: 32,
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 300),
+            switchInCurve: const Cubic(0.27, 1.21, .77, 1.09),
+            switchOutCurve: const Cubic(0.27, 1.21, .77, 1.09),
+            transitionBuilder: (Widget child, Animation<double> animation) {
+              return ScaleTransition(
+                scale: animation,
+                child: child,
+              );
+            },
+            child: Column(
+              children: [
+                Expanded(
+                  child: Icon(
+                    tabItem.icon,
+                    color: isSelected
+                        ? AppTheme.light
+                        : Colors.white.withOpacity(0.5),
+                    size: 32,
+                  ),
+                ),
+                isSelected
+                    ? Text(
+                        tabItem.title,
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleSmall!
+                            .copyWith(color: AppTheme.light),
+                      )
+                    : const SizedBox.shrink(),
+                isSelected
+                    ? const SizedBox(
+                        height: 4,
+                      )
+                    : const SizedBox.shrink(),
+              ],
+            ),
           ),
         );
       }).toList(),
     );
-  }
-
-  @override
-  void initState() {
-    super.initState();
   }
 
   @override
@@ -117,7 +147,7 @@ class _BaseScaffoldState extends ConsumerState<BaseScaffold>
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: Container(
-                        height: 60,
+                        height: 64,
                         width: MediaQuery.sizeOf(context).width,
                         margin: const EdgeInsets.symmetric(horizontal: 32),
                         decoration: const BoxDecoration(
