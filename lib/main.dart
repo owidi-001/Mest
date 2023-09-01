@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mest/presentation/auth/login.dart';
-import 'package:mest/presentation/auth/register.dart';
-import 'package:mest/presentation/auth/welcome.dart';
-import 'package:mest/presentation/auth/splash.dart';
-import 'package:mest/presentation/dashboard/base.dart';
-import 'package:mest/routes/routes.dart';
+import 'package:mest/features/auth/login.dart';
+import 'package:mest/features/auth/register.dart';
+import 'package:mest/features/auth/welcome.dart';
+import 'package:mest/features/auth/splash.dart';
+import 'package:mest/features/dashboard/base.dart';
+import 'package:mest/shared/routes/routes.dart';
 
 void main() {
   runApp(ProviderScope(child: App()));
@@ -36,7 +36,7 @@ final GoRouter _router = GoRouter(
     GoRoute(
       path: AppRoute.register,
       builder: (BuildContext context, GoRouterState state) {
-        return const Register();
+        return Register();
       },
     ),
     GoRoute(
