@@ -34,3 +34,23 @@ class DrawerProvider extends StateNotifier<bool> {
     }
   }
 }
+
+// Search
+final searchNotifierProvider =
+    StateNotifierProvider<SearchProvider, bool>((ref) {
+  return SearchProvider();
+});
+
+class SearchProvider extends StateNotifier<bool> {
+  SearchProvider() : super(false);
+
+  void toggle() {
+    if (kDebugMode) {
+      print("Togling :$state");
+    }
+    state = !state;
+    if (kDebugMode) {
+      print("Toggled :$state");
+    }
+  }
+}

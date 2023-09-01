@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:matrix4_transform/matrix4_transform.dart';
 import 'package:mest/features/dashboard/cart/cart.dart';
 import 'package:mest/features/dashboard/journal/journal.dart';
 import 'package:mest/features/dashboard/home/home.dart';
 import 'package:mest/features/dashboard/reads/reads.dart';
+import 'package:mest/shared/common/utils/utils.dart';
 import 'package:mest/shared/core/provider/dashboard_provider.dart';
 import 'package:mest/theme/font.dart';
 import 'package:mest/theme/theme.dart';
@@ -31,13 +33,14 @@ class _BaseScaffoldState extends ConsumerState<BaseScaffold>
   ];
 
   List<TabItem> tabItems = List.of([
-    TabItem(CupertinoIcons.bag_fill, "Shop", AppTheme.dark,
+    TabItem(Icons.dashboard_rounded, "Library", AppTheme.dark,
         labelStyle: AppFont.normal),
-    TabItem(CupertinoIcons.news_solid, "Reads", AppTheme.dark,
+    TabItem(CupertinoIcons.news_solid, "Collection", AppTheme.dark,
         labelStyle: AppFont.normal),
-    TabItem(CupertinoIcons.cart_fill, "Cart", AppTheme.dark,
+    TabItem(FontAwesomeIcons.bagShopping, "Cart", AppTheme.dark,
         labelStyle: AppFont.normal),
-    TabItem(Icons.person, "Profile", AppTheme.dark, labelStyle: AppFont.normal),
+    TabItem(FontAwesomeIcons.sliders, "Options", AppTheme.dark,
+        labelStyle: AppFont.normal),
   ]);
 
   Widget bottomNavigation() {
@@ -123,13 +126,30 @@ class _BaseScaffoldState extends ConsumerState<BaseScaffold>
               backgroundColor: Colors.transparent,
               elevation: 0,
               leading: IconButton(
-                  icon: Icon(
-                    !isOpen ? Icons.menu : Icons.arrow_back_ios,
+                  icon: FaIcon(
+                    !isOpen
+                        ? FontAwesomeIcons.barsStaggered
+                        : FontAwesomeIcons.xmark,
                     color: AppTheme.dark,
                   ),
                   onPressed: () {
                     ref.read(drawerNotifierProvider.notifier).toggle();
                   }),
+              actions: [
+                CircleAvatar(
+                  backgroundColor: AppTheme.dark,
+                  child: ClipOval(
+                    child: Image.asset(
+                      "assets/icons/logo.png",
+                      width: 30,
+                      height: 30,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: PADDING,
+                )
+              ],
             ),
             body: Stack(
               children: [

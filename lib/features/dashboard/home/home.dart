@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mest/features/dashboard/home/models/book_model.dart';
 import 'package:mest/features/dashboard/home/provider/home_provider.dart';
 import 'package:mest/features/dashboard/home/utils/shimmer_utils.dart';
 import 'package:mest/features/dashboard/home/widgets/book_card_home.dart';
 import 'package:mest/features/dashboard/home/widgets/book_card_home_skeleton.dart';
 import 'package:mest/features/dashboard/home/widgets/category_btn.dart';
+import 'package:mest/features/dashboard/home/widgets/trending_card.dart';
 import 'package:mest/theme/font.dart';
 import 'package:mest/theme/theme.dart';
 import 'package:mest/shared/common/utils/utils.dart';
@@ -50,6 +52,90 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const SizedBox(
+                  height: 16,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      "Hi Alex!",
+                      style: AppFont.normal.copyWith(
+                          fontWeight: FontWeight.bold, color: Colors.grey),
+                    ),
+                  ],
+                ),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      "Keep Exploring",
+                      style: AppFont.title.copyWith(color: AppTheme.light),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: PADDING,
+                ),
+                Container(
+                  margin: const EdgeInsets.only(right: PADDING),
+                  decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(.5),
+                      borderRadius: BorderRadius.circular(PADDING / 2)),
+                  child: TextField(
+                    decoration: InputDecoration(
+                        hintText: "Search your books",
+                        hintStyle:
+                            TextStyle(color: Colors.grey.withOpacity(.8)),
+                        border: InputBorder.none,
+                        contentPadding: const EdgeInsets.all(PADDING),
+                        isDense: true,
+                        suffixIcon: IconButton(
+                            style: const ButtonStyle(
+                                backgroundColor:
+                                    MaterialStatePropertyAll(AppTheme.dark)),
+                            onPressed: () {},
+                            icon: const FaIcon(
+                              FontAwesomeIcons.magnifyingGlass,
+                              color: AppTheme.light,
+                            ))),
+                  ),
+                ),
+
+                const SizedBox(
+                  height: PADDING,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      "Trending books",
+                      style: AppFont.title.copyWith(color: AppTheme.dark),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: PADDING / 2,
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: PADDING),
+                  height: 200.0,
+                  child: ListView.builder(
+                    itemBuilder: (context, index) => TrendingCard(
+                      book: Book.dummy[index],
+                    ),
+                    itemCount: Book.dummy.length,
+                    scrollDirection: Axis.horizontal,
+                  ),
+                ),
+                const SizedBox(
+                  height: PADDING,
+                ),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.end,

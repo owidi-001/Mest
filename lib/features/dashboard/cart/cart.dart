@@ -99,47 +99,47 @@ class _CartScreenState extends ConsumerState<CartScreen> {
                     }), childCount: provider.length),
                   ),
                 ),
-
-          SliverToBoxAdapter(
-            child: Container(
-              padding: const EdgeInsets.all(PADDING),
-              decoration: const BoxDecoration(),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    "Total:",
-                    style: AppFont.subtitle
-                        .copyWith(color: AppTheme.gray, fontSize: 16),
+          SliverFillRemaining(
+            child: Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(PADDING),
+                  decoration: const BoxDecoration(),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        "Total:",
+                        style: AppFont.subtitle
+                            .copyWith(color: AppTheme.gray, fontSize: 16),
+                      ),
+                      const Divider(),
+                      Text(
+                        "Ksh. 400",
+                        style: AppFont.title.copyWith(fontSize: 20),
+                      )
+                    ],
                   ),
-                  const Divider(),
-                  Text(
-                    "Ksh. 400",
-                    style: AppFont.title.copyWith(fontSize: 20),
-                  )
-                ],
-              ),
+                ),
+
+                // spacer
+                const Padding(padding: EdgeInsets.all(8.0)),
+
+                // Checkout button
+                AppButton(
+                  title: "Pay with mPesa",
+                  onTap: (() {
+                    const ScaffoldMessenger(
+                      child:
+                          SnackBar(content: Text("Chill bro! working on it.")),
+                    );
+                  }),
+                  background: AppTheme.dark,
+                ),
+
+                SizedBox(height: PADDING * 5),
+              ],
             ),
-          ),
-
-          // spacer
-          const SliverPadding(padding: EdgeInsets.all(8.0)),
-
-          // Checkout button
-          SliverToBoxAdapter(
-            child: AppButton(
-              title: "Pay with mPesa",
-              onTap: (() {
-                const ScaffoldMessenger(
-                  child: SnackBar(content: Text("Chill bro! working on it.")),
-                );
-              }),
-              background: AppTheme.dark,
-            ),
-          ),
-
-          const SliverToBoxAdapter(
-            child: SizedBox(height: PADDING * 5),
           ),
         ],
       ),

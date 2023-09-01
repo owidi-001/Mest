@@ -12,38 +12,37 @@ class BookCardSkeleton extends StatelessWidget {
       margin: const EdgeInsets.symmetric(
           vertical: PADDING / 2, horizontal: PADDING / 2),
       decoration: const BoxDecoration(color: Colors.white54),
-      child: Stack(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Positioned(
-            top: 0,
-            right: PADDING,
-            child: Icon(
-              Icons.bookmark,
-              size: 32,
-              color: AppTheme.gray,
-            ),
-          ),
-          Column(
+          Row(
+            mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    height: 150,
-                    width: 120,
-                    margin: const EdgeInsets.all(PADDING / 4),
-                    decoration: BoxDecoration(
-                        color: AppTheme.gray,
-                        borderRadius: BorderRadius.circular(PADDING / 2)),
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
+              Container(
+                height: 150,
+                width: 120,
+                margin: const EdgeInsets.all(PADDING / 4),
+                decoration: BoxDecoration(
+                    color: AppTheme.gray,
+                    borderRadius: BorderRadius.circular(PADDING / 2)),
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          color: AppTheme.gray,
+                          borderRadius: BorderRadius.circular(PADDING / 2)),
+                      margin: const EdgeInsets.all(8.0),
+                      height: 15,
+                      width: 200,
+                    ),
+                    Row(
                       children: [
                         Container(
                           decoration: BoxDecoration(
@@ -51,67 +50,6 @@ class BookCardSkeleton extends StatelessWidget {
                               borderRadius: BorderRadius.circular(PADDING / 2)),
                           margin: const EdgeInsets.all(8.0),
                           height: 15,
-                          width: 200,
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                  color: AppTheme.gray,
-                                  borderRadius:
-                                      BorderRadius.circular(PADDING / 2)),
-                              margin: const EdgeInsets.all(8.0),
-                              height: 15,
-                              width: 100,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                  color: AppTheme.gray,
-                                  borderRadius:
-                                      BorderRadius.circular(PADDING / 2)),
-                              margin: const EdgeInsets.all(8.0),
-                              height: 10,
-                              width: 50,
-                            ),
-                          ],
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                              color: AppTheme.gray,
-                              borderRadius: BorderRadius.circular(PADDING / 2)),
-                          margin: const EdgeInsets.all(8.0),
-                          height: 8,
-                          width: 200,
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                              color: AppTheme.gray,
-                              borderRadius: BorderRadius.circular(PADDING / 2)),
-                          margin: const EdgeInsets.all(8.0),
-                          height: 8,
-                          width: 200,
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              const Divider(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                              color: AppTheme.gray,
-                              borderRadius: BorderRadius.circular(PADDING / 2)),
-                          margin: const EdgeInsets.all(8.0),
-                          height: 8,
                           width: 100,
                         ),
                         Container(
@@ -119,46 +57,101 @@ class BookCardSkeleton extends StatelessWidget {
                               color: AppTheme.gray,
                               borderRadius: BorderRadius.circular(PADDING / 2)),
                           margin: const EdgeInsets.all(8.0),
-                          height: 8,
-                          width: 150,
+                          height: 10,
+                          width: 50,
                         ),
                       ],
                     ),
+                    Container(
+                      decoration: BoxDecoration(
+                          color: AppTheme.gray,
+                          borderRadius: BorderRadius.circular(PADDING / 2)),
+                      margin: const EdgeInsets.all(8.0),
+                      height: 8,
+                      width: 200,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                          color: AppTheme.gray,
+                          borderRadius: BorderRadius.circular(PADDING / 2)),
+                      margin: const EdgeInsets.all(8.0),
+                      height: 8,
+                      width: 200,
+                    ),
+                  ],
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Icon(
+                  Icons.bookmark,
+                  // size: 32,
+                  color: AppTheme.gray,
+                ),
+              ),
+            ],
+          ),
+          const Divider(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                          color: AppTheme.gray,
+                          borderRadius: BorderRadius.circular(PADDING / 2)),
+                      margin: const EdgeInsets.all(8.0),
+                      height: 8,
+                      width: 100,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                          color: AppTheme.gray,
+                          borderRadius: BorderRadius.circular(PADDING / 2)),
+                      margin: const EdgeInsets.all(8.0),
+                      height: 8,
+                      width: 150,
+                    ),
+                  ],
+                ),
+              ),
+              Row(
+                children: [
+                  TextButton.icon(
+                    onPressed: () {},
+                    icon: const Icon(
+                      CupertinoIcons.chat_bubble_fill,
+                      color: AppTheme.gray,
+                    ),
+                    label: Container(
+                      decoration: BoxDecoration(
+                          color: AppTheme.gray,
+                          borderRadius: BorderRadius.circular(PADDING / 2)),
+                      margin: const EdgeInsets.all(8.0),
+                      height: 5,
+                      width: 20,
+                    ),
                   ),
-                  Row(
-                    children: [
-                      TextButton.icon(
-                        onPressed: () {},
-                        icon: const Icon(
-                          CupertinoIcons.chat_bubble_fill,
+                  TextButton.icon(
+                    onPressed: () {},
+                    icon: const Icon(
+                      CupertinoIcons.heart_fill,
+                      color: AppTheme.gray,
+                    ),
+                    label: Container(
+                      decoration: BoxDecoration(
                           color: AppTheme.gray,
-                        ),
-                        label: Container(
-                          decoration: BoxDecoration(
-                              color: AppTheme.gray,
-                              borderRadius: BorderRadius.circular(PADDING / 2)),
-                          margin: const EdgeInsets.all(8.0),
-                          height: 5,
-                          width: 20,
-                        ),
-                      ),
-                      TextButton.icon(
-                        onPressed: () {},
-                        icon: const Icon(
-                          CupertinoIcons.heart_fill,
-                          color: AppTheme.gray,
-                        ),
-                        label: Container(
-                          decoration: BoxDecoration(
-                              color: AppTheme.gray,
-                              borderRadius: BorderRadius.circular(PADDING / 2)),
-                          margin: const EdgeInsets.all(8.0),
-                          height: 5,
-                          width: 20,
-                        ),
-                      ),
-                    ],
-                  )
+                          borderRadius: BorderRadius.circular(PADDING / 2)),
+                      margin: const EdgeInsets.all(8.0),
+                      height: 5,
+                      width: 20,
+                    ),
+                  ),
                 ],
               )
             ],
