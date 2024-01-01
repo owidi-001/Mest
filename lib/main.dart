@@ -9,7 +9,7 @@ import 'package:mest/features/dashboard/base.dart';
 import 'package:mest/shared/routes/routes.dart';
 
 void main() {
-  runApp(ProviderScope(child: App()));
+  runApp(const ProviderScope(child: App()));
 }
 
 /// The route configuration.
@@ -49,7 +49,7 @@ final GoRouter _router = GoRouter(
 );
 
 class App extends StatelessWidget {
-  App({Key? key}) : super(key: key);
+  const App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

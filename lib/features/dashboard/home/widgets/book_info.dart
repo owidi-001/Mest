@@ -149,7 +149,7 @@ class SnippetViewContent extends StatelessWidget {
           // Give a snippet
           const Padding(
               padding: EdgeInsets.symmetric(vertical: 16.0),
-              child: SnippetCard(snippet: aboutBody)),
+              child: SnippetCard(snippet: bookInfo)),
           const SizedBox(
             height: 16,
           ),

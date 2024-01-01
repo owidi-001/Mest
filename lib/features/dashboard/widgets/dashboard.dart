@@ -6,7 +6,7 @@ import 'package:matrix4_transform/matrix4_transform.dart';
 import 'package:mest/features/dashboard/cart/cart.dart';
 import 'package:mest/features/dashboard/settings/settings.dart';
 import 'package:mest/features/dashboard/home/home.dart';
-import 'package:mest/features/dashboard/reads/reads.dart';
+import 'package:mest/features/dashboard/statistics/statistics.dart';
 import 'package:mest/shared/common/utils/utils.dart';
 import 'package:mest/shared/core/provider/dashboard_provider.dart';
 import 'package:mest/theme/theme.dart';
@@ -27,7 +27,7 @@ class _BaseScaffoldState extends ConsumerState<BaseScaffold>
   List<Widget> screens = [
     const HomeScreen(),
     const CartScreen(), // Cart
-    const Reads(), // Change to books read and saved screens
+    const StatisticsScreen(), // Change to books read and saved screens
     const Settings() // Statistics : Books read, saved, bought, read time, target and profile details
   ];
 

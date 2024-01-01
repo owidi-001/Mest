@@ -68,7 +68,7 @@ class LibraryBookCard extends ConsumerWidget {
                 ],
               ),
             ),
-            IconButton(onPressed: () {}, icon: Icon(Icons.chevron_right))
+            IconButton(onPressed: () {}, icon: const Icon(Icons.chevron_right))
           ],
         ),
       ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mest/features/dashboard/home/models/book_model.dart';
-import 'package:mest/features/dashboard/home/widgets/boot_info.dart';
+import 'package:mest/features/dashboard/home/widgets/book_info.dart';
 import 'package:mest/shared/common/utils/utils.dart';
 
 class DetailScreen extends StatelessWidget {

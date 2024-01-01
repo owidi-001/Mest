@@ -47,6 +47,7 @@ class _DrawerWidgetState extends ConsumerState<DrawerWidget> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Container(
+                            padding: const EdgeInsets.all(PADDING / 4),
                             width: MediaQuery.of(context).size.width / 4,
                             height: MediaQuery.of(context).size.width / 4,
                             margin: const EdgeInsets.only(bottom: PADDING),
@@ -56,7 +57,9 @@ class _DrawerWidgetState extends ConsumerState<DrawerWidget> {
                                     MediaQuery.of(context).size.width / 4),
                                 image: const DecorationImage(
                                     image: AssetImage(
-                                        "assets/icons/logo.png"))),
+                                      "assets/icons/logo.png",
+                                    ),
+                                    fit: BoxFit.contain)),
                           ),
                           Row(
                             children: [
@@ -121,51 +124,6 @@ class _DrawerWidgetState extends ConsumerState<DrawerWidget> {
                     ),
                     TextButton.icon(
                       onPressed: () {
-                        showAboutDialog(
-                            context: context,
-                            applicationName: 'Mest Holic',
-                            applicationIcon: const FlutterLogo(),
-                            applicationVersion: '1.0.0',
-                            children: [
-                              const Text(
-                                aboutBody,
-                                style: AppFont.normal,
-                              )
-                            ]);
-                      },
-                      icon: const Icon(CupertinoIcons.info_circle_fill),
-                      label: Text(
-                        "About",
-                        style: AppFont.subtitle
-                            .copyWith(color: Colors.white, fontSize: 16),
-                      ),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(bottom: 20),
-                    ),
-                    TextButton.icon(
-                      onPressed: () {},
-                      icon: const Icon(
-                        CupertinoIcons.share_solid,
-                      ),
-                      label: Text(
-                        "Share App",
-                        style: AppFont.subtitle
-                            .copyWith(color: Colors.white, fontSize: 16),
-                      ),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(bottom: 20),
-                    ),
-                    const Divider(
-                      color: Colors.blueGrey,
-                      thickness: 2,
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.only(bottom: 20),
-                    ),
-                    TextButton.icon(
-                      onPressed: () {
                         showDialog(
                             context: context,
                             builder: (context) => const LogoutDialog());
@@ -189,7 +147,7 @@ class _DrawerWidgetState extends ConsumerState<DrawerWidget> {
   }
 }
 
-const aboutBody =
+const bookInfo =
     """Welcome to our Mest application! Our app is the perfect place for book lovers and avid readers to discover and purchase their favorite titles.
 
 With our easy-to-use interface, users can easily browse through thousands of books from various genres and authors, including bestsellers, classic literature, and niche topics. Our app also offers personalized recommendations based on users' reading history and preferences, ensuring that they never run out of new and exciting books to read.

@@ -4,6 +4,7 @@ import 'package:mest/features/dashboard/settings/components/library/library.dart
 import 'package:mest/shared/common/utils/utils.dart';
 import 'package:mest/theme/font.dart';
 import 'package:mest/theme/theme.dart';
+import 'package:flutter_share/flutter_share.dart';
 
 class Settings extends StatelessWidget {
   const Settings({Key? key}) : super(key: key);
@@ -68,9 +69,16 @@ class Settings extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => const Library()));
                 },
               ),
-              const ListTile(
-                leading: Icon(Icons.percent),
-                title: Text('Discounts'),
+              ListTile(
+                leading: const Icon(Icons.share_rounded),
+                title: const Text('Invite Friends'),
+                onTap: () async {
+                  await FlutterShare.share(
+                    title: "Invite to Mest",
+                    text:
+                        "**Exciting news!**\nAre you a reader?\nI've been loving Mest app and wanted to share it with you. Use my invite code #inviteCode for special perks. 🚀",
+                  );
+                },
               ),
               const ListTile(
                 leading: Icon(Icons.settings),
@@ -81,8 +89,8 @@ class Settings extends StatelessWidget {
                 title: Text('Terms and Conditions'),
               ),
               ListTile(
-                leading: Icon(Icons.help),
-                title: Text('Help'),
+                leading: const Icon(Icons.help),
+                title: const Text('Help'),
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => const HelpScreen()));

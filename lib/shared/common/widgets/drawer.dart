@@ -33,10 +33,10 @@ class DrawerWidget extends StatelessWidget {
               const SizedBox(
                 width: PADDING,
               ),
-              Column(
+              const Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
                     "John Doe",
                     style: AppFont.title,
