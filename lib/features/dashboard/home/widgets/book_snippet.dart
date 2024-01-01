@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mest/shared/common/utils/utils.dart';
 import 'package:mest/theme/theme.dart';
 
 class SnippetCard extends StatefulWidget {
@@ -11,13 +12,13 @@ class SnippetCard extends StatefulWidget {
 }
 
 class _SnippetCardState extends State<SnippetCard> {
-  bool isMinimized = true;
+  bool isMinimized = false;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 8.0),
-      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8.0),
+      padding: const EdgeInsets.symmetric(
+          vertical: PADDING / 2, horizontal: PADDING / 2),
       decoration: BoxDecoration(
           color: AppTheme.light, borderRadius: BorderRadius.circular(8.0)),
       child: Column(
@@ -26,17 +27,22 @@ class _SnippetCardState extends State<SnippetCard> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Read Snippet",
-                style: Theme.of(context).textTheme.bodyLarge,
+                "Snippet".toUpperCase(),
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                    decoration:
+                        TextDecoration.combine([TextDecoration.underline])),
               ),
               IconButton(
                 onPressed: () {
                   isMinimized = !isMinimized;
                   setState(() {});
                 },
-                icon: Icon(isMinimized
-                    ? CupertinoIcons.chevron_down
-                    : CupertinoIcons.chevron_up),
+                icon: Icon(
+                  isMinimized
+                      ? Icons.arrow_drop_down_rounded
+                      : Icons.arrow_drop_up_rounded,
+                  size: PADDING * 2,
+                ),
               ),
             ],
           ),

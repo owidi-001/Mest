@@ -99,11 +99,11 @@ class _CartScreenState extends ConsumerState<CartScreen> {
                     }), childCount: provider.length),
                   ),
                 ),
-          SliverFillRemaining(
+          SliverToBoxAdapter(
             child: Column(
               children: [
                 Container(
-                  padding: const EdgeInsets.all(PADDING),
+                  padding: const EdgeInsets.symmetric(horizontal: PADDING),
                   decoration: const BoxDecoration(),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
@@ -137,7 +137,7 @@ class _CartScreenState extends ConsumerState<CartScreen> {
                   background: AppTheme.dark,
                 ),
 
-                SizedBox(height: PADDING * 5),
+                const SizedBox(height: PADDING * 5),
               ],
             ),
           ),

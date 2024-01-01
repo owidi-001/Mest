@@ -132,12 +132,12 @@ class SnippetViewContent extends StatelessWidget {
           ),
           RichText(
             text: TextSpan(
-              style: const TextStyle(color: AppTheme.dark),
+              style: AppFont.normal,
               children: [
                 const TextSpan(text: "Author\n"),
                 TextSpan(
                   text: "${product.author}",
-                  style: AppFont.subtitle,
+                  style: AppFont.subtitle.copyWith(fontSize: PADDING),
                 )
               ],
             ),
@@ -155,7 +155,7 @@ class SnippetViewContent extends StatelessWidget {
           ),
 
           AppButton(
-            title: "Buy",
+            title: "Add to cart",
             onTap: () {},
             background: Colors.blueGrey,
           ),

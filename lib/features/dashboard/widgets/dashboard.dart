@@ -26,15 +26,15 @@ class _BaseScaffoldState extends ConsumerState<BaseScaffold>
 
   List<Widget> screens = [
     const HomeScreen(),
-    const Reads(), // Change to books read and saved screens
     const CartScreen(), // Cart
+    const Reads(), // Change to books read and saved screens
     const Journal() // Statistics : Books read, saved, bought, read time, target and profile details
   ];
 
   List<IconData> tabItems = List.of([
     Icons.dashboard_rounded,
-    CupertinoIcons.news_solid,
     FontAwesomeIcons.bagShopping,
+    CupertinoIcons.news_solid,
     FontAwesomeIcons.sliders
   ]);
 
