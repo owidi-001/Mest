@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mest/features/dashboard/settings/components/help/help.dart';
 import 'package:mest/features/dashboard/settings/components/library/library.dart';
 import 'package:mest/shared/common/utils/utils.dart';
 import 'package:mest/theme/font.dart';
@@ -63,8 +64,8 @@ class Settings extends StatelessWidget {
                 leading: const Icon(Icons.book),
                 title: const Text('My Library'),
                 onTap: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => const Library()));
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => const Library()));
                 },
               ),
               const ListTile(
@@ -79,9 +80,13 @@ class Settings extends StatelessWidget {
                 leading: Icon(Icons.description),
                 title: Text('Terms and Conditions'),
               ),
-              const ListTile(
+              ListTile(
                 leading: Icon(Icons.help),
                 title: Text('Help'),
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const HelpScreen()));
+                },
               ),
               const ListTile(
                 leading: Icon(Icons.info),
