@@ -1,4 +1,5 @@
 class Book {
+  String? genre;
   String? title;
   String? url;
   String? coverImage;
@@ -8,7 +9,8 @@ class Book {
   String? ISBN;
   int? length;
   Book(
-      {this.title,
+      {this.genre,
+      this.title,
       this.url,
       this.coverImage,
       this.author,

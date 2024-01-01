@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:matrix4_transform/matrix4_transform.dart';
 import 'package:mest/features/dashboard/cart/cart.dart';
-import 'package:mest/features/dashboard/journal/journal.dart';
+import 'package:mest/features/dashboard/settings/settings.dart';
 import 'package:mest/features/dashboard/home/home.dart';
 import 'package:mest/features/dashboard/reads/reads.dart';
 import 'package:mest/shared/common/utils/utils.dart';
@@ -28,7 +28,7 @@ class _BaseScaffoldState extends ConsumerState<BaseScaffold>
     const HomeScreen(),
     const CartScreen(), // Cart
     const Reads(), // Change to books read and saved screens
-    const Journal() // Statistics : Books read, saved, bought, read time, target and profile details
+    const Settings() // Statistics : Books read, saved, bought, read time, target and profile details
   ];
 
   List<IconData> tabItems = List.of([
