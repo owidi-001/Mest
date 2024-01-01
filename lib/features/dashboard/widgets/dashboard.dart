@@ -9,7 +9,6 @@ import 'package:mest/features/dashboard/home/home.dart';
 import 'package:mest/features/dashboard/reads/reads.dart';
 import 'package:mest/shared/common/utils/utils.dart';
 import 'package:mest/shared/core/provider/dashboard_provider.dart';
-import 'package:mest/theme/font.dart';
 import 'package:mest/theme/theme.dart';
 
 class BaseScaffold extends ConsumerStatefulWidget {
@@ -32,15 +31,11 @@ class _BaseScaffoldState extends ConsumerState<BaseScaffold>
     const Journal() // Statistics : Books read, saved, bought, read time, target and profile details
   ];
 
-  List<TabItem> tabItems = List.of([
-    TabItem(Icons.dashboard_rounded, "Library", AppTheme.dark,
-        labelStyle: AppFont.normal),
-    TabItem(CupertinoIcons.news_solid, "Collection", AppTheme.dark,
-        labelStyle: AppFont.normal),
-    TabItem(FontAwesomeIcons.bagShopping, "Cart", AppTheme.dark,
-        labelStyle: AppFont.normal),
-    TabItem(FontAwesomeIcons.sliders, "Options", AppTheme.dark,
-        labelStyle: AppFont.normal),
+  List<IconData> tabItems = List.of([
+    Icons.dashboard_rounded,
+    CupertinoIcons.news_solid,
+    FontAwesomeIcons.bagShopping,
+    FontAwesomeIcons.sliders
   ]);
 
   Widget bottomNavigation() {
@@ -50,7 +45,7 @@ class _BaseScaffoldState extends ConsumerState<BaseScaffold>
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: tabItems.asMap().entries.map((entry) {
         final int index = entry.key;
-        final TabItem tabItem = entry.value;
+        final IconData tabItem = entry.value;
         final bool isSelected = currentPosition == index;
 
         return GestureDetector(
@@ -71,27 +66,13 @@ class _BaseScaffoldState extends ConsumerState<BaseScaffold>
               children: [
                 Expanded(
                   child: Icon(
-                    tabItem.icon,
+                    tabItem,
                     color: isSelected
                         ? AppTheme.light
                         : Colors.white.withOpacity(0.5),
-                    size: 32,
+                    size: 28,
                   ),
                 ),
-                isSelected
-                    ? Text(
-                        tabItem.title,
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleSmall!
-                            .copyWith(color: AppTheme.light),
-                      )
-                    : const SizedBox.shrink(),
-                isSelected
-                    ? const SizedBox(
-                        height: 4,
-                      )
-                    : const SizedBox.shrink(),
               ],
             ),
           ),
@@ -161,23 +142,20 @@ class _BaseScaffoldState extends ConsumerState<BaseScaffold>
                     },
                     child: screens[position]),
                 Positioned(
-                  bottom: 0,
+                  bottom: 8,
                   right: 0,
                   left: 0,
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: Container(
-                        height: 64,
+                        height: 50,
                         width: MediaQuery.sizeOf(context).width,
                         margin: const EdgeInsets.symmetric(horizontal: 32),
                         decoration: const BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(color: Colors.grey, blurRadius: 2.0)
-                            ],
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(32),
-                                topRight: Radius.circular(32)),
-                            color: AppTheme.dark),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(16),
+                            ),
+                            color: AppTheme.gray),
                         child: bottomNavigation()),
                   ),
                 )
@@ -188,20 +166,4 @@ class _BaseScaffoldState extends ConsumerState<BaseScaffold>
       ),
     );
   }
-}
-
-class TabItem {
-  IconData icon;
-  String title;
-  Color circleColor;
-  Color? circleStrokeColor;
-  TextStyle labelStyle;
-
-  TabItem(
-    this.icon,
-    this.title,
-    this.circleColor, {
-    this.circleStrokeColor,
-    this.labelStyle = const TextStyle(fontWeight: FontWeight.bold),
-  });
 }

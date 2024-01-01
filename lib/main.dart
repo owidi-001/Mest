@@ -36,7 +36,7 @@ final GoRouter _router = GoRouter(
     GoRoute(
       path: AppRoute.register,
       builder: (BuildContext context, GoRouterState state) {
-        return Register();
+        return const Register();
       },
     ),
     GoRoute(

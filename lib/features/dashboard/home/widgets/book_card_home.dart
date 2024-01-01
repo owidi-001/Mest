@@ -36,14 +36,14 @@ class _BookCardState extends State<BookCard> {
         setState(() {});
       },
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: PADDING / 2),
-        decoration: const BoxDecoration(color: Colors.white54),
+        decoration: const BoxDecoration(
+            color: Colors.white54,
+            borderRadius: BorderRadius.all(Radius.circular(PADDING / 4))),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -56,7 +56,9 @@ class _BookCardState extends State<BookCard> {
                           ? Colors.transparent
                           : AppTheme.dark,
                       image: DecorationImage(
-                          image: AssetImage(widget.book.coverImage!)),
+                          image: AssetImage(widget.book.coverImage!),
+                          fit: BoxFit.contain,
+                          alignment: Alignment.center),
                       borderRadius: BorderRadius.circular(PADDING / 2)),
                 ),
                 Expanded(
@@ -64,14 +66,38 @@ class _BookCardState extends State<BookCard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          "Cruiding Destination Ideas",
-                          textWidthBasis: TextWidthBasis.parent,
-                          style: AppFont.title.copyWith(
-                              fontSize: 18, overflow: TextOverflow.clip),
-                        ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                "Cruiding Destination Ideas",
+                                textWidthBasis: TextWidthBasis.parent,
+                                style: AppFont.title.copyWith(
+                                    fontSize: 18, overflow: TextOverflow.clip),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: InkWell(
+                              onTap: () {
+                                setState(() {
+                                  saved = !saved;
+                                });
+                              },
+                              child: FaIcon(
+                                saved
+                                    ? FontAwesomeIcons.solidBookmark
+                                    : FontAwesomeIcons.bookmark,
+                                color: saved ? AppTheme.dark : AppTheme.gray,
+                                size: PADDING + 4,
+                              ),
+                            ),
+                          )
+                        ],
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -87,25 +113,11 @@ class _BookCardState extends State<BookCard> {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: InkWell(
-                    onTap: () {
-                      setState(() {
-                        saved = !saved;
-                      });
-                    },
-                    child: FaIcon(
-                      saved
-                          ? FontAwesomeIcons.solidBookmark
-                          : FontAwesomeIcons.bookmark,
-                      color: saved ? AppTheme.dark : AppTheme.gray,
-                    ),
-                  ),
-                )
               ],
             ),
-            const Divider(),
+            const Divider(
+              height: 0,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,

@@ -20,7 +20,6 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
-  // TODO! to be dynamically generated : Food topics
   List<String> categories = [
     "All",
     "Business",
@@ -62,17 +61,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     Text(
                       "Hi Alex!",
                       style: AppFont.normal.copyWith(
-                          fontWeight: FontWeight.bold, color: Colors.grey),
+                          fontWeight: FontWeight.bold, color: AppTheme.gray),
                     ),
                   ],
                 ),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      "Keep Exploring",
+                      "Keep Reading...",
                       style: AppFont.title.copyWith(color: AppTheme.light),
                     ),
                   ],
@@ -87,21 +85,22 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       borderRadius: BorderRadius.circular(PADDING / 2)),
                   child: TextField(
                     decoration: InputDecoration(
-                        hintText: "Search your books",
-                        hintStyle:
-                            TextStyle(color: Colors.grey.withOpacity(.8)),
-                        border: InputBorder.none,
-                        contentPadding: const EdgeInsets.all(PADDING),
-                        isDense: true,
-                        suffixIcon: IconButton(
-                            style: const ButtonStyle(
-                                backgroundColor:
-                                    MaterialStatePropertyAll(AppTheme.dark)),
-                            onPressed: () {},
-                            icon: const FaIcon(
-                              FontAwesomeIcons.magnifyingGlass,
-                              color: AppTheme.light,
-                            ))),
+                      hintText: "Search your books",
+                      hintStyle: TextStyle(color: Colors.grey.withOpacity(.8)),
+                      border: InputBorder.none,
+                      contentPadding: const EdgeInsets.all(PADDING),
+                      isDense: true,
+                      suffixIcon: IconButton(
+                        style: const ButtonStyle(
+                            backgroundColor:
+                                MaterialStatePropertyAll(AppTheme.dark)),
+                        onPressed: () {},
+                        icon: const FaIcon(
+                          FontAwesomeIcons.magnifyingGlass,
+                          color: AppTheme.light,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
 
@@ -109,13 +108,23 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   height: PADDING,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      "Trending books",
-                      style: AppFont.title.copyWith(color: AppTheme.dark),
+                      "Trending",
+                      style: AppFont.subtitle.copyWith(
+                        fontSize: 24,
+                      ),
                     ),
+                    TextButton.icon(
+                        style: const ButtonStyle(
+                            foregroundColor:
+                                MaterialStatePropertyAll(AppTheme.gray)),
+                        onPressed: () {},
+                        icon: const Text("See all"),
+                        label:
+                            const Icon(Icons.keyboard_double_arrow_right_sharp))
                   ],
                 ),
                 const SizedBox(
@@ -142,15 +151,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   children: [
                     Text(
                       title.substring(0, 1).toUpperCase() + title.substring(1),
-                      style: AppFont.title.copyWith(color: AppTheme.dark),
-                    ),
-                    const SizedBox(
-                      width: PADDING,
-                    ),
-                    Text(
-                      "Recommended",
-                      style: AppFont.normal.copyWith(
-                          fontWeight: FontWeight.bold, color: Colors.black54),
+                      style: AppFont.subtitle.copyWith(fontSize: 24),
                     )
                   ],
                 ),
@@ -189,12 +190,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ),
         SliverPadding(
           padding: const EdgeInsets.symmetric(horizontal: PADDING),
-          sliver: SliverList(
-            delegate: SliverChildBuilderDelegate(
-                (context, index) => BookCard(
-                      book: Book.dummy.first,
-                    ),
-                childCount: Book.dummy.length * 2),
+          sliver: SliverList.separated(
+            itemBuilder: (context, index) => BookCard(
+              book: Book.dummy.first,
+            ),
+            itemCount: Book.dummy.length * 2,
+            separatorBuilder: (context, index) => const Divider(
+              color: Colors.transparent,
+            ),
           ),
         ),
         const SliverToBoxAdapter(
